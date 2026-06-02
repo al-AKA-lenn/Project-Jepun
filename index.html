@@ -5,25 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nihongo Yomi — Belajar Hiragana & Katakana</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Kaisei+Decol:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=DM+Sans:wght@300;400;500;600&family=Kaisei+Decol:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- ===== FLOATING BUBBLES BG ===== -->
-  <div class="bg-bubbles" id="bgBubbles"></div>
+  <!-- ===== SUBTLE BG PATTERN ===== -->
+  <div class="bg-pattern"></div>
+  <div class="bg-glow"></div>
 
   <!-- ===== HEADER ===== -->
   <header class="site-header">
     <div class="logo">
       <span class="logo-jp">日本語</span>
+      <span class="logo-divider"></span>
       <span class="logo-text">Nihongo Yomi</span>
     </div>
     <nav class="main-nav">
-      <button class="nav-btn active" data-section="home">🏠 Beranda</button>
-      <button class="nav-btn" data-section="hiragana">あ Hiragana</button>
-      <button class="nav-btn" data-section="katakana">ア Katakana</button>
-      <button class="nav-btn" data-section="quiz">🎯 Kuis</button>
+      <button class="nav-btn active" data-section="home">Beranda</button>
+      <button class="nav-btn" data-section="hiragana">ひ Hiragana</button>
+      <button class="nav-btn" data-section="katakana">カ Katakana</button>
+      <button class="nav-btn" data-section="quiz">Kuis</button>
     </nav>
   </header>
 
@@ -32,115 +34,60 @@
 
     <!-- ======= HOME SECTION ======= -->
     <section id="section-home" class="section active">
-      <div class="hero">
-        <div class="hero-text">
-          <h1 class="hero-title">
-            Belajar <span class="highlight-pink">Hiragana</span> &<br/>
-            <span class="highlight-blue">Katakana</span> yuk!
-          </h1>
-          <p class="hero-sub">Bareng Orihime, belajar jadi lebih seru dan mudah! がんばって！✨</p>
-          <div class="hero-buttons">
-            <button class="btn-primary" data-section="hiragana">Mulai Hiragana あ</button>
-            <button class="btn-secondary" data-section="katakana">Mulai Katakana ア</button>
-          </div>
-        </div>
 
-        <!-- ORIHIME CHARACTER -->
-        <div class="orihime-wrap">
-          <div class="orihime-bubble" id="orihimeBubble">
-            がんばって！<br/>Kamu pasti bisa! 🌸
-          </div>
-          <div class="orihime-svg-wrap">
-            <svg class="orihime-svg" viewBox="0 0 260 420" xmlns="http://www.w3.org/2000/svg">
-              <!-- Body / Dress -->
-              <ellipse cx="130" cy="340" rx="65" ry="80" fill="#FF85C1"/>
-              <rect x="80" y="260" width="100" height="100" rx="20" fill="#FF85C1"/>
-              <!-- Collar -->
-              <polygon points="110,265 130,295 150,265" fill="#fff" opacity="0.8"/>
-              <!-- Sleeves -->
-              <ellipse cx="72" cy="285" rx="22" ry="38" fill="#FF85C1"/>
-              <ellipse cx="188" cy="285" rx="22" ry="38" fill="#FF85C1"/>
-              <!-- Hands -->
-              <ellipse cx="72" cy="320" rx="14" ry="14" fill="#FFD6B8"/>
-              <ellipse cx="188" cy="320" rx="14" ry="14" fill="#FFD6B8"/>
-              <!-- Skirt details -->
-              <ellipse cx="130" cy="395" rx="68" ry="28" fill="#FF60A8"/>
-              <!-- Neck -->
-              <rect x="116" y="230" width="28" height="40" rx="10" fill="#FFD6B8"/>
-              <!-- Head -->
-              <ellipse cx="130" cy="200" rx="62" ry="66" fill="#FFD6B8"/>
-              <!-- Hair base (auburn/brown) -->
-              <ellipse cx="130" cy="175" rx="65" ry="68" fill="#8B3A1A"/>
-              <!-- Hair front -->
-              <path d="M68 190 Q55 170 65 140 Q78 115 100 108" fill="#8B3A1A" stroke="none"/>
-              <path d="M192 190 Q205 170 195 140 Q182 115 160 108" fill="#8B3A1A" stroke="none"/>
-              <!-- Hair top volume -->
-              <ellipse cx="130" cy="148" rx="62" ry="52" fill="#A0471E"/>
-              <!-- Hair highlight -->
-              <ellipse cx="118" cy="140" rx="18" ry="9" fill="#C76030" opacity="0.6"/>
-              <!-- Side hair pieces (Orihime's signature) -->
-              <path d="M68 200 Q40 230 55 270 Q62 285 78 278 Q70 250 82 225 Z" fill="#8B3A1A"/>
-              <path d="M192 200 Q220 230 205 270 Q198 285 182 278 Q190 250 178 225 Z" fill="#8B3A1A"/>
-              <!-- Hair clips (Orihime's signature barrettes) -->
-              <rect x="78" y="188" width="22" height="8" rx="4" fill="#FFD700" stroke="#E0A800" stroke-width="1"/>
-              <rect x="82" y="185" width="6" height="14" rx="3" fill="#FF9800"/>
-              <rect x="92" y="185" width="6" height="14" rx="3" fill="#FF9800"/>
-              <!-- Eyes -->
-              <ellipse cx="107" cy="202" rx="13" ry="14" fill="#4a2060"/>
-              <ellipse cx="153" cy="202" rx="13" ry="14" fill="#4a2060"/>
-              <!-- Eye shine -->
-              <ellipse cx="111" cy="197" rx="5" ry="5" fill="white"/>
-              <ellipse cx="157" cy="197" rx="5" ry="5" fill="white"/>
-              <ellipse cx="113" cy="196" rx="2" ry="2" fill="#bbb"/>
-              <ellipse cx="159" cy="196" rx="2" ry="2" fill="#bbb"/>
-              <!-- Eyelashes top -->
-              <path d="M95 193 Q107 184 120 193" stroke="#2a0040" stroke-width="2.5" fill="none"/>
-              <path d="M140 193 Q153 184 166 193" stroke="#2a0040" stroke-width="2.5" fill="none"/>
-              <!-- Blush -->
-              <ellipse cx="90" cy="215" rx="14" ry="8" fill="#FFB3C6" opacity="0.6"/>
-              <ellipse cx="170" cy="215" rx="14" ry="8" fill="#FFB3C6" opacity="0.6"/>
-              <!-- Nose -->
-              <ellipse cx="130" cy="218" rx="4" ry="3" fill="#E8B89A"/>
-              <!-- Smile -->
-              <path d="M113 232 Q130 248 147 232" stroke="#C0604A" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-              <!-- Leg hints -->
-              <ellipse cx="105" cy="410" rx="20" ry="10" fill="#FFD6B8"/>
-              <ellipse cx="155" cy="410" rx="20" ry="10" fill="#FFD6B8"/>
-              <!-- Shoes -->
-              <ellipse cx="105" cy="416" rx="22" ry="9" fill="#FF60A8"/>
-              <ellipse cx="155" cy="416" rx="22" ry="9" fill="#FF60A8"/>
-              <!-- Flower hairpin (Orihime's) -->
-              <circle cx="160" cy="155" r="10" fill="#FF85C1"/>
-              <circle cx="172" cy="150" r="8" fill="#FF60A8"/>
-              <circle cx="168" cy="163" r="8" fill="#FF85C1"/>
-              <circle cx="157" cy="166" r="8" fill="#FFB3D9"/>
-              <circle cx="163" cy="157" r="5" fill="#FFD700"/>
-            </svg>
+      <!-- Hero -->
+      <div class="hero">
+        <div class="hero-kana-deco" aria-hidden="true">
+          <span>あ</span><span>い</span><span>う</span>
+          <span>か</span><span>き</span><span>く</span>
+          <span>さ</span><span>し</span><span>す</span>
+        </div>
+        <div class="hero-content">
+          <p class="hero-eyebrow">Mulai perjalananmu</p>
+          <h1 class="hero-title">
+            Kuasai <em>Hiragana</em><br/>& <em>Katakana</em>
+          </h1>
+          <p class="hero-sub">Pelajari 92 karakter aksara Jepang secara sistematis — dengan flashcard, grid interaktif, dan kuis adaptif.</p>
+          <div class="hero-buttons">
+            <button class="btn-primary" data-section="hiragana">Mulai Hiragana</button>
+            <button class="btn-ghost" data-section="katakana">Katakana →</button>
           </div>
         </div>
       </div>
 
-      <!-- Stats / Info cards -->
+      <!-- Info cards -->
       <div class="info-cards">
-        <div class="info-card card-pink">
-          <div class="card-icon">あ</div>
-          <div class="card-title">Hiragana</div>
-          <div class="card-desc">46 karakter dasar untuk kata-kata Jepang asli</div>
+        <div class="info-card" data-target="hiragana">
+          <div class="card-kana">あ</div>
+          <div class="card-body">
+            <div class="card-title">Hiragana</div>
+            <div class="card-desc">46 karakter dasar untuk kata-kata Jepang asli</div>
+          </div>
+          <div class="card-arrow">→</div>
         </div>
-        <div class="info-card card-blue">
-          <div class="card-icon">ア</div>
-          <div class="card-title">Katakana</div>
-          <div class="card-desc">46 karakter untuk kata serapan asing</div>
+        <div class="info-card" data-target="katakana">
+          <div class="card-kana">ア</div>
+          <div class="card-body">
+            <div class="card-title">Katakana</div>
+            <div class="card-desc">46 karakter untuk kata serapan asing</div>
+          </div>
+          <div class="card-arrow">→</div>
         </div>
-        <div class="info-card card-yellow">
-          <div class="card-icon">🎯</div>
-          <div class="card-title">Kuis Interaktif</div>
-          <div class="card-desc">Uji pemahamanmu dengan kuis seru!</div>
+        <div class="info-card" data-target="quiz">
+          <div class="card-kana">？</div>
+          <div class="card-body">
+            <div class="card-title">Kuis Interaktif</div>
+            <div class="card-desc">Uji pemahamanmu dengan soal pilihan ganda</div>
+          </div>
+          <div class="card-arrow">→</div>
         </div>
-        <div class="info-card card-green">
-          <div class="card-icon">🃏</div>
-          <div class="card-title">Flashcard</div>
-          <div class="card-desc">Hafal dengan metode kartu kilat yang efektif</div>
+        <div class="info-card" data-target="hiragana">
+          <div class="card-kana">⇄</div>
+          <div class="card-body">
+            <div class="card-title">Flashcard</div>
+            <div class="card-desc">Hafal efektif dengan metode kartu kilat</div>
+          </div>
+          <div class="card-arrow">→</div>
         </div>
       </div>
     </section>
@@ -148,8 +95,11 @@
     <!-- ======= HIRAGANA SECTION ======= -->
     <section id="section-hiragana" class="section">
       <div class="section-header">
-        <h2 class="section-title">Hiragana <span class="jp-sub">ひらがな</span></h2>
-        <p class="section-desc">Klik karakter untuk mendengar pelafalannya! 🔊</p>
+        <div class="section-title-group">
+          <h2 class="section-title">Hiragana</h2>
+          <span class="jp-sub">ひらがな</span>
+        </div>
+        <p class="section-desc">Klik karakter untuk melihat detail & mendengar pelafalannya.</p>
         <div class="filter-tabs" id="hiraganaFilter">
           <button class="filter-btn active" data-group="all">Semua</button>
           <button class="filter-btn" data-group="vowel">Vokal</button>
@@ -166,10 +116,9 @@
       </div>
       <div class="char-grid" id="hiraganaGrid"></div>
 
-      <!-- Flashcard mode -->
       <div class="flashcard-section">
-        <h3>Mode Flashcard 🃏</h3>
-        <div class="flashcard-box" id="hiraganaFlashcard">
+        <h3 class="fc-heading">Flashcard</h3>
+        <div class="flashcard-box">
           <div class="flashcard" id="hFlashcard">
             <div class="flashcard-front"><span id="hFlashChar">あ</span></div>
             <div class="flashcard-back"><span id="hFlashRoma">a</span><span id="hFlashMeaning"></span></div>
@@ -178,7 +127,7 @@
         <div class="flashcard-controls">
           <button class="btn-fc" id="hPrev">← Sebelumnya</button>
           <span class="fc-counter" id="hCounter">1 / 46</span>
-          <button class="btn-fc" id="hFlip">🔄 Balik</button>
+          <button class="btn-fc" id="hFlip">Balik</button>
           <button class="btn-fc" id="hNext">Berikutnya →</button>
         </div>
       </div>
@@ -187,8 +136,11 @@
     <!-- ======= KATAKANA SECTION ======= -->
     <section id="section-katakana" class="section">
       <div class="section-header">
-        <h2 class="section-title">Katakana <span class="jp-sub">カタカナ</span></h2>
-        <p class="section-desc">Klik karakter untuk mendengar pelafalannya! 🔊</p>
+        <div class="section-title-group">
+          <h2 class="section-title">Katakana</h2>
+          <span class="jp-sub">カタカナ</span>
+        </div>
+        <p class="section-desc">Klik karakter untuk melihat detail & mendengar pelafalannya.</p>
         <div class="filter-tabs" id="katakanaFilter">
           <button class="filter-btn active" data-group="all">Semua</button>
           <button class="filter-btn" data-group="vowel">Vokal</button>
@@ -205,10 +157,9 @@
       </div>
       <div class="char-grid" id="katakanaGrid"></div>
 
-      <!-- Flashcard mode -->
       <div class="flashcard-section">
-        <h3>Mode Flashcard 🃏</h3>
-        <div class="flashcard-box" id="katakanaFlashcard">
+        <h3 class="fc-heading">Flashcard</h3>
+        <div class="flashcard-box">
           <div class="flashcard" id="kFlashcard">
             <div class="flashcard-front"><span id="kFlashChar">ア</span></div>
             <div class="flashcard-back"><span id="kFlashRoma">a</span></div>
@@ -217,7 +168,7 @@
         <div class="flashcard-controls">
           <button class="btn-fc" id="kPrev">← Sebelumnya</button>
           <span class="fc-counter" id="kCounter">1 / 46</span>
-          <button class="btn-fc" id="kFlip">🔄 Balik</button>
+          <button class="btn-fc" id="kFlip">Balik</button>
           <button class="btn-fc" id="kNext">Berikutnya →</button>
         </div>
       </div>
@@ -226,11 +177,10 @@
     <!-- ======= QUIZ SECTION ======= -->
     <section id="section-quiz" class="section">
       <div class="quiz-header">
-        <h2 class="section-title">Kuis 🎯 <span class="jp-sub">テスト</span></h2>
-        <p class="section-desc">Pilih mode kuis yang ingin kamu coba!</p>
+        <h2 class="section-title">Kuis <span class="jp-sub">テスト</span></h2>
+        <p class="section-desc">Pilih pengaturan dan uji kemampuanmu.</p>
       </div>
 
-      <!-- Quiz Setup -->
       <div class="quiz-setup" id="quizSetup">
         <div class="quiz-options">
           <div class="quiz-option-group">
@@ -257,40 +207,38 @@
             </div>
           </div>
         </div>
-        <button class="btn-primary big" id="startQuiz">Mulai Kuis! 🚀</button>
+        <button class="btn-primary big" id="startQuiz">Mulai Kuis</button>
       </div>
 
-      <!-- Quiz Game -->
       <div class="quiz-game hidden" id="quizGame">
         <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="quizFill"></div></div>
         <div class="quiz-info">
           <span id="quizProgress">Soal 1/10</span>
-          <span id="quizScore">✅ 0 | ❌ 0</span>
+          <span id="quizScore">✓ 0 &nbsp;✗ 0</span>
         </div>
         <div class="quiz-question-box">
           <div class="quiz-question" id="quizQuestion">あ</div>
           <p class="quiz-question-label" id="quizLabel">Apa romaji dari aksara ini?</p>
         </div>
         <div class="quiz-choices" id="quizChoices"></div>
-
-        <!-- Orihime feedback -->
         <div class="orihime-feedback hidden" id="orihimeFeedback">
-          <div class="feedback-face" id="feedbackFace">😊</div>
-          <div class="feedback-msg" id="feedbackMsg">Bagus sekali!</div>
+          <div class="feedback-face" id="feedbackFace">✓</div>
+          <div class="feedback-msg" id="feedbackMsg">Tepat sekali!</div>
         </div>
       </div>
 
-      <!-- Quiz Result -->
       <div class="quiz-result hidden" id="quizResult">
-        <div class="result-orihime">🌸</div>
+        <div class="result-icon">結</div>
         <h3 id="resultTitle">Hebat sekali!</h3>
         <div class="result-score">
           <span id="resultScore">8/10</span>
           <span id="resultPercent">80%</span>
         </div>
-        <p id="resultMsg">Orihime bangga sama kamu!</p>
-        <button class="btn-primary big" id="retryQuiz">Coba Lagi 🔁</button>
-        <button class="btn-secondary" id="backToSetup">Ganti Pengaturan</button>
+        <p id="resultMsg">Terus berlatih untuk menjadi mahir!</p>
+        <div class="result-actions">
+          <button class="btn-primary big" id="retryQuiz">Coba Lagi</button>
+          <button class="btn-ghost" id="backToSetup">Ganti Pengaturan</button>
+        </div>
       </div>
     </section>
 
@@ -298,21 +246,17 @@
 
   <!-- ===== POPUP CARD ===== -->
   <div class="card-popup hidden" id="cardPopup">
-    <div class="popup-inner">
-      <button class="popup-close" id="popupClose">✕</button>
-      <div class="popup-char" id="popupChar">あ</div>
-      <div class="popup-roma" id="popupRoma">a</div>
-      <div class="popup-type" id="popupType">Hiragana</div>
-      <div class="popup-example" id="popupExample"></div>
-      <button class="btn-sound" id="popupSound">🔊 Dengarkan</button>
-    </div>
+    <button class="popup-close" id="popupClose">✕</button>
+    <div class="popup-char" id="popupChar">あ</div>
+    <div class="popup-roma" id="popupRoma">a</div>
+    <div class="popup-type" id="popupType">Hiragana</div>
+    <div class="popup-example" id="popupExample"></div>
+    <button class="btn-sound" id="popupSound">▶ Dengarkan</button>
   </div>
   <div class="popup-overlay hidden" id="popupOverlay"></div>
 
-  <!-- ===== TOAST ===== -->
   <div class="toast hidden" id="toast"></div>
 
-  <!-- ===== SCRIPTS ===== -->
   <script src="data.js"></script>
   <script src="app.js"></script>
 </body>
