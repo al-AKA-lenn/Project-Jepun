@@ -1,150 +1,228 @@
 // =============================================
 //  NIHONGO YOMI — DATA
-//  Hiragana & Katakana Character Data
 // =============================================
 
 const HIRAGANA = [
-  // Vowels
-  { char: "あ", roma: "a",  group: "vowel", example: "あお (ao) = biru" },
-  { char: "い", roma: "i",  group: "vowel", example: "いぬ (inu) = anjing" },
-  { char: "う", roma: "u",  group: "vowel", example: "うみ (umi) = laut" },
-  { char: "え", roma: "e",  group: "vowel", example: "えき (eki) = stasiun" },
-  { char: "お", roma: "o",  group: "vowel", example: "おかね (okane) = uang" },
-  // K row
-  { char: "か", roma: "ka", group: "k", example: "かわ (kawa) = sungai" },
-  { char: "き", roma: "ki", group: "k", example: "きもの (kimono) = kimono" },
-  { char: "く", roma: "ku", group: "k", example: "くに (kuni) = negara" },
-  { char: "け", roma: "ke", group: "k", example: "けむり (kemuri) = asap" },
-  { char: "こ", roma: "ko", group: "k", example: "こい (koi) = ikan koi" },
-  // S row
-  { char: "さ", roma: "sa", group: "s", example: "さくら (sakura) = bunga sakura" },
-  { char: "し", roma: "shi",group: "s", example: "しま (shima) = pulau" },
-  { char: "す", roma: "su", group: "s", example: "すし (sushi) = sushi" },
-  { char: "せ", roma: "se", group: "s", example: "せかい (sekai) = dunia" },
-  { char: "そ", roma: "so", group: "s", example: "そら (sora) = langit" },
-  // T row
-  { char: "た", roma: "ta", group: "t", example: "たべる (taberu) = makan" },
-  { char: "ち", roma: "chi",group: "t", example: "ちかい (chikai) = dekat" },
-  { char: "つ", roma: "tsu",group: "t", example: "つき (tsuki) = bulan" },
-  { char: "て", roma: "te", group: "t", example: "てがみ (tegami) = surat" },
-  { char: "と", roma: "to", group: "t", example: "とり (tori) = burung" },
-  // N row
-  { char: "な", roma: "na", group: "n", example: "なに (nani) = apa" },
-  { char: "に", roma: "ni", group: "n", example: "にほん (nihon) = Jepang" },
-  { char: "ぬ", roma: "nu", group: "n", example: "ぬの (nuno) = kain" },
-  { char: "ね", roma: "ne", group: "n", example: "ねこ (neko) = kucing" },
-  { char: "の", roma: "no", group: "n", example: "のみもの (nomimono) = minuman" },
-  // H row
-  { char: "は", roma: "ha", group: "h", example: "はな (hana) = bunga" },
-  { char: "ひ", roma: "hi", group: "h", example: "ひと (hito) = orang" },
-  { char: "ふ", roma: "fu", group: "h", example: "ふじさん (fujisan) = Gunung Fuji" },
-  { char: "へ", roma: "he", group: "h", example: "へや (heya) = kamar" },
-  { char: "ほ", roma: "ho", group: "h", example: "ほし (hoshi) = bintang" },
-  // M row
-  { char: "ま", roma: "ma", group: "m", example: "まち (machi) = kota" },
-  { char: "み", roma: "mi", group: "m", example: "みず (mizu) = air" },
-  { char: "む", roma: "mu", group: "m", example: "むし (mushi) = serangga" },
-  { char: "め", roma: "me", group: "m", example: "めがね (megane) = kacamata" },
-  { char: "も", roma: "mo", group: "m", example: "もり (mori) = hutan" },
-  // Y row
-  { char: "や", roma: "ya", group: "y", example: "やま (yama) = gunung" },
-  { char: "ゆ", roma: "yu", group: "y", example: "ゆき (yuki) = salju" },
-  { char: "よ", roma: "yo", group: "y", example: "よる (yoru) = malam" },
-  // R row
-  { char: "ら", roma: "ra", group: "r", example: "らーめん (ramen) = ramen" },
-  { char: "り", roma: "ri", group: "r", example: "りんご (ringo) = apel" },
-  { char: "る", roma: "ru", group: "r", example: "るす (rusu) = tidak di rumah" },
-  { char: "れ", roma: "re", group: "r", example: "れいぞうこ (reizouko) = kulkas" },
-  { char: "ろ", roma: "ro", group: "r", example: "ろうか (rouka) = koridor" },
-  // W row
-  { char: "わ", roma: "wa", group: "w", example: "わたし (watashi) = saya" },
-  { char: "を", roma: "wo", group: "w", example: "(partikel objek)" },
-  // N standalone
-  { char: "ん", roma: "n",  group: "n", example: "ほん (hon) = buku" },
+  { char: "あ", roma: "a",   group: "vowel", example: "あお (ao) = biru" },
+  { char: "い", roma: "i",   group: "vowel", example: "いぬ (inu) = anjing" },
+  { char: "う", roma: "u",   group: "vowel", example: "うみ (umi) = laut" },
+  { char: "え", roma: "e",   group: "vowel", example: "えき (eki) = stasiun" },
+  { char: "お", roma: "o",   group: "vowel", example: "おかね (okane) = uang" },
+  { char: "か", roma: "ka",  group: "k", example: "かわ (kawa) = sungai" },
+  { char: "き", roma: "ki",  group: "k", example: "きもの (kimono) = kimono" },
+  { char: "く", roma: "ku",  group: "k", example: "くに (kuni) = negara" },
+  { char: "け", roma: "ke",  group: "k", example: "けむり (kemuri) = asap" },
+  { char: "こ", roma: "ko",  group: "k", example: "こい (koi) = ikan koi" },
+  { char: "さ", roma: "sa",  group: "s", example: "さくら (sakura) = bunga sakura" },
+  { char: "し", roma: "shi", group: "s", example: "しま (shima) = pulau" },
+  { char: "す", roma: "su",  group: "s", example: "すし (sushi) = sushi" },
+  { char: "せ", roma: "se",  group: "s", example: "せかい (sekai) = dunia" },
+  { char: "そ", roma: "so",  group: "s", example: "そら (sora) = langit" },
+  { char: "た", roma: "ta",  group: "t", example: "たべる (taberu) = makan" },
+  { char: "ち", roma: "chi", group: "t", example: "ちかい (chikai) = dekat" },
+  { char: "つ", roma: "tsu", group: "t", example: "つき (tsuki) = bulan" },
+  { char: "て", roma: "te",  group: "t", example: "てがみ (tegami) = surat" },
+  { char: "と", roma: "to",  group: "t", example: "とり (tori) = burung" },
+  { char: "な", roma: "na",  group: "n", example: "なに (nani) = apa" },
+  { char: "に", roma: "ni",  group: "n", example: "にほん (nihon) = Jepang" },
+  { char: "ぬ", roma: "nu",  group: "n", example: "ぬの (nuno) = kain" },
+  { char: "ね", roma: "ne",  group: "n", example: "ねこ (neko) = kucing" },
+  { char: "の", roma: "no",  group: "n", example: "のみもの (nomimono) = minuman" },
+  { char: "は", roma: "ha",  group: "h", example: "はな (hana) = bunga" },
+  { char: "ひ", roma: "hi",  group: "h", example: "ひと (hito) = orang" },
+  { char: "ふ", roma: "fu",  group: "h", example: "ふじさん (fujisan) = Gunung Fuji" },
+  { char: "へ", roma: "he",  group: "h", example: "へや (heya) = kamar" },
+  { char: "ほ", roma: "ho",  group: "h", example: "ほし (hoshi) = bintang" },
+  { char: "ま", roma: "ma",  group: "m", example: "まち (machi) = kota" },
+  { char: "み", roma: "mi",  group: "m", example: "みず (mizu) = air" },
+  { char: "む", roma: "mu",  group: "m", example: "むし (mushi) = serangga" },
+  { char: "め", roma: "me",  group: "m", example: "めがね (megane) = kacamata" },
+  { char: "も", roma: "mo",  group: "m", example: "もり (mori) = hutan" },
+  { char: "や", roma: "ya",  group: "y", example: "やま (yama) = gunung" },
+  { char: "ゆ", roma: "yu",  group: "y", example: "ゆき (yuki) = salju" },
+  { char: "よ", roma: "yo",  group: "y", example: "よる (yoru) = malam" },
+  { char: "ら", roma: "ra",  group: "r", example: "らーめん (ramen) = ramen" },
+  { char: "り", roma: "ri",  group: "r", example: "りんご (ringo) = apel" },
+  { char: "る", roma: "ru",  group: "r", example: "るす (rusu) = tidak di rumah" },
+  { char: "れ", roma: "re",  group: "r", example: "れいぞうこ (reizouko) = kulkas" },
+  { char: "ろ", roma: "ro",  group: "r", example: "ろうか (rouka) = koridor" },
+  { char: "わ", roma: "wa",  group: "w", example: "わたし (watashi) = saya" },
+  { char: "を", roma: "wo",  group: "w", example: "(partikel objek)" },
+  { char: "ん", roma: "n",   group: "n", example: "ほん (hon) = buku" },
 ];
 
 const KATAKANA = [
-  // Vowels
   { char: "ア", roma: "a",   group: "vowel", example: "アイス (aisu) = es krim" },
   { char: "イ", roma: "i",   group: "vowel", example: "イチゴ (ichigo) = stroberi" },
   { char: "ウ", roma: "u",   group: "vowel", example: "ウィルス (wirusu) = virus" },
   { char: "エ", roma: "e",   group: "vowel", example: "エレベーター (erebeetaa) = lift" },
   { char: "オ", roma: "o",   group: "vowel", example: "オレンジ (orenji) = jeruk" },
-  // K row
   { char: "カ", roma: "ka",  group: "k", example: "カメラ (kamera) = kamera" },
   { char: "キ", roma: "ki",  group: "k", example: "キー (kii) = kunci" },
   { char: "ク", roma: "ku",  group: "k", example: "クラス (kurasu) = kelas" },
   { char: "ケ", roma: "ke",  group: "k", example: "ケーキ (keeki) = kue" },
   { char: "コ", roma: "ko",  group: "k", example: "コーヒー (koohii) = kopi" },
-  // S row
   { char: "サ", roma: "sa",  group: "s", example: "サッカー (sakkaa) = sepak bola" },
   { char: "シ", roma: "shi", group: "s", example: "シャツ (shatsu) = kemeja" },
   { char: "ス", roma: "su",  group: "s", example: "スポーツ (supootsu) = olahraga" },
   { char: "セ", roma: "se",  group: "s", example: "セーター (seetaa) = sweater" },
   { char: "ソ", roma: "so",  group: "s", example: "ソファ (sofa) = sofa" },
-  // T row
   { char: "タ", roma: "ta",  group: "t", example: "タクシー (takushii) = taksi" },
   { char: "チ", roma: "chi", group: "t", example: "チーズ (chiizu) = keju" },
   { char: "ツ", roma: "tsu", group: "t", example: "ツアー (tsuaa) = tur" },
   { char: "テ", roma: "te",  group: "t", example: "テレビ (terebi) = televisi" },
   { char: "ト", roma: "to",  group: "t", example: "トイレ (toire) = toilet" },
-  // N row
   { char: "ナ", roma: "na",  group: "n", example: "ナイフ (naifu) = pisau" },
   { char: "ニ", roma: "ni",  group: "n", example: "ニュース (nyuusu) = berita" },
   { char: "ヌ", roma: "nu",  group: "n", example: "ヌードル (nuudoru) = mie" },
   { char: "ネ", roma: "ne",  group: "n", example: "ネクタイ (nekutai) = dasi" },
   { char: "ノ", roma: "no",  group: "n", example: "ノート (nooto) = buku catatan" },
-  // H row
   { char: "ハ", roma: "ha",  group: "h", example: "ハンバーガー (hanbaagaa) = burger" },
   { char: "ヒ", roma: "hi",  group: "h", example: "ヒーター (hiitaa) = pemanas" },
   { char: "フ", roma: "fu",  group: "h", example: "フルーツ (furuutsu) = buah-buahan" },
   { char: "ヘ", roma: "he",  group: "h", example: "ヘルメット (herumetto) = helm" },
   { char: "ホ", roma: "ho",  group: "h", example: "ホテル (hoteru) = hotel" },
-  // M row
   { char: "マ", roma: "ma",  group: "m", example: "マンゴー (mangoo) = mangga" },
   { char: "ミ", roma: "mi",  group: "m", example: "ミルク (miruku) = susu" },
   { char: "ム", roma: "mu",  group: "m", example: "ムービー (muubii) = film" },
   { char: "メ", roma: "me",  group: "m", example: "メール (meeru) = email" },
   { char: "モ", roma: "mo",  group: "m", example: "モデル (moderu) = model" },
-  // Y row
   { char: "ヤ", roma: "ya",  group: "y", example: "ヤシ (yashi) = pohon kelapa" },
   { char: "ユ", roma: "yu",  group: "y", example: "ユニフォーム (yunifoomu) = seragam" },
   { char: "ヨ", roma: "yo",  group: "y", example: "ヨーグルト (yooguruto) = yogurt" },
-  // R row
   { char: "ラ", roma: "ra",  group: "r", example: "ラジオ (rajio) = radio" },
   { char: "リ", roma: "ri",  group: "r", example: "リンゴ (ringo) = apel" },
   { char: "ル", roma: "ru",  group: "r", example: "ルール (ruuru) = aturan" },
   { char: "レ", roma: "re",  group: "r", example: "レストラン (resutoran) = restoran" },
   { char: "ロ", roma: "ro",  group: "r", example: "ロボット (robotto) = robot" },
-  // W row
   { char: "ワ", roma: "wa",  group: "w", example: "ワイン (wain) = anggur/wine" },
   { char: "ヲ", roma: "wo",  group: "w", example: "(partikel objek formal)" },
-  // N standalone
-  { char: "ン", roma: "n",   group: "n", example: "アイスクリーム → クリーム" },
+  { char: "ン", roma: "n",   group: "n", example: "パン (pan) = roti" },
 ];
 
-// Orihime's encouraging messages
-const ORIHIME_MESSAGES = [
-  "がんばって！\nKamu pasti bisa! 🌸",
-  "すごい！\nLuar biasa! ⭐",
-  "一緒に頑張ろう！\nAyo semangat bareng! 💪",
-  "大丈夫！\nTenang, kamu hebat! 🌟",
-  "もう少し！\nDikit lagi! よし！ 🎯",
-  "頑張れ！\nJangan menyerah ya! 🍊",
-  "上手！\nPintar sekali! 🎉",
+// =============================================
+//  KOSAKATA (Vocabulary)
+// =============================================
+const VOCABULARY = [
+  // Sapaan
+  { id: 1, category: "sapaan", indo: "Halo / Selamat pagi", jp: "おはよう", roma: "Ohayou", note: "Dipakai pagi hari (informal)" },
+  { id: 2, category: "sapaan", indo: "Selamat siang/sore", jp: "こんにちは", roma: "Konnichiwa", note: "Dipakai siang–sore hari" },
+  { id: 3, category: "sapaan", indo: "Selamat malam", jp: "こんばんは", roma: "Konbanwa", note: "Dipakai saat malam" },
+  { id: 4, category: "sapaan", indo: "Selamat tinggal", jp: "さようなら", roma: "Sayounara", note: "Perpisahan agak formal" },
+  { id: 5, category: "sapaan", indo: "Sampai jumpa", jp: "またね", roma: "Mata ne", note: "Informal, 'see you'" },
+  { id: 6, category: "sapaan", indo: "Terima kasih", jp: "ありがとう", roma: "Arigatou", note: "Informal; formal: ありがとうございます" },
+  { id: 7, category: "sapaan", indo: "Sama-sama", jp: "どういたしまして", roma: "Dou itashimashite", note: "Respon terima kasih" },
+  { id: 8, category: "sapaan", indo: "Maaf / Permisi", jp: "すみません", roma: "Sumimasen", note: "Bisa untuk minta maaf atau minta perhatian" },
+  { id: 9, category: "sapaan", indo: "Iya / Ya", jp: "はい", roma: "Hai", note: "Persetujuan formal" },
+  { id: 10, category: "sapaan", indo: "Tidak / Bukan", jp: "いいえ", roma: "Iie", note: "Penolakan formal" },
+
+  // Angka
+  { id: 11, category: "angka", indo: "Nol", jp: "ゼロ", roma: "Zero", note: "Dari kata serapan" },
+  { id: 12, category: "angka", indo: "Satu", jp: "いち", roma: "Ichi", note: "" },
+  { id: 13, category: "angka", indo: "Dua", jp: "に", roma: "Ni", note: "" },
+  { id: 14, category: "angka", indo: "Tiga", jp: "さん", roma: "San", note: "" },
+  { id: 15, category: "angka", indo: "Empat", jp: "し / よん", roma: "Shi / Yon", note: "Shi jarang dipakai (mirip 'mati')" },
+  { id: 16, category: "angka", indo: "Lima", jp: "ご", roma: "Go", note: "" },
+  { id: 17, category: "angka", indo: "Enam", jp: "ろく", roma: "Roku", note: "" },
+  { id: 18, category: "angka", indo: "Tujuh", jp: "しち / なな", roma: "Shichi / Nana", note: "Nana lebih umum dipakai" },
+  { id: 19, category: "angka", indo: "Delapan", jp: "はち", roma: "Hachi", note: "" },
+  { id: 20, category: "angka", indo: "Sembilan", jp: "く / きゅう", roma: "Ku / Kyuu", note: "" },
+  { id: 21, category: "angka", indo: "Sepuluh", jp: "じゅう", roma: "Juu", note: "" },
+
+  // Warna
+  { id: 22, category: "warna", indo: "Merah", jp: "あか", roma: "Aka", note: "" },
+  { id: 23, category: "warna", indo: "Biru", jp: "あお", roma: "Ao", note: "Juga bisa berarti hijau (lampu)" },
+  { id: 24, category: "warna", indo: "Putih", jp: "しろ", roma: "Shiro", note: "" },
+  { id: 25, category: "warna", indo: "Hitam", jp: "くろ", roma: "Kuro", note: "" },
+  { id: 26, category: "warna", indo: "Kuning", jp: "きいろ", roma: "Kiiro", note: "" },
+  { id: 27, category: "warna", indo: "Hijau", jp: "みどり", roma: "Midori", note: "" },
+  { id: 28, category: "warna", indo: "Merah muda", jp: "ピンク", roma: "Pinku", note: "Kata serapan dari 'pink'" },
+  { id: 29, category: "warna", indo: "Ungu", jp: "むらさき", roma: "Murasaki", note: "" },
+  { id: 30, category: "warna", indo: "Oranye", jp: "オレンジ", roma: "Orenji", note: "Kata serapan" },
+  { id: 31, category: "warna", indo: "Coklat", jp: "ちゃいろ", roma: "Chairo", note: "Warna teh (cha)" },
+
+  // Keluarga
+  { id: 32, category: "keluarga", indo: "Ibu (milik sendiri)", jp: "はは", roma: "Haha", note: "Dipakai saat bicara soal ibu sendiri" },
+  { id: 33, category: "keluarga", indo: "Ibu (orang lain)", jp: "おかあさん", roma: "Okaasan", note: "Menyebut ibu orang lain / memanggil ibu" },
+  { id: 34, category: "keluarga", indo: "Ayah (milik sendiri)", jp: "ちち", roma: "Chichi", note: "Dipakai saat bicara soal ayah sendiri" },
+  { id: 35, category: "keluarga", indo: "Ayah (orang lain)", jp: "おとうさん", roma: "Otousan", note: "Menyebut ayah orang lain / memanggil ayah" },
+  { id: 36, category: "keluarga", indo: "Kakak laki-laki", jp: "おにいさん", roma: "Oniisan", note: "" },
+  { id: 37, category: "keluarga", indo: "Kakak perempuan", jp: "おねえさん", roma: "Oneesan", note: "" },
+  { id: 38, category: "keluarga", indo: "Adik", jp: "おとうと / いもうと", roma: "Otouto / Imouto", note: "Otouto = adik laki, Imouto = adik perempuan" },
+
+  // Makanan & Minuman
+  { id: 39, category: "makanan", indo: "Nasi / Makanan", jp: "ごはん", roma: "Gohan", note: "Juga berarti 'makan' secara umum" },
+  { id: 40, category: "makanan", indo: "Air", jp: "みず", roma: "Mizu", note: "" },
+  { id: 41, category: "makanan", indo: "Susu", jp: "ぎゅうにゅう", roma: "Gyuunyuu", note: "Secara harfiah 'susu sapi'" },
+  { id: 42, category: "makanan", indo: "Teh", jp: "おちゃ", roma: "Ocha", note: "Biasanya teh hijau" },
+  { id: 43, category: "makanan", indo: "Kopi", jp: "コーヒー", roma: "Koohii", note: "Kata serapan" },
+  { id: 44, category: "makanan", indo: "Roti", jp: "パン", roma: "Pan", note: "Dari kata Portugis 'pão'" },
+  { id: 45, category: "makanan", indo: "Daging", jp: "にく", roma: "Niku", note: "" },
+  { id: 46, category: "makanan", indo: "Ikan", jp: "さかな", roma: "Sakana", note: "" },
+  { id: 47, category: "makanan", indo: "Telur", jp: "たまご", roma: "Tamago", note: "" },
+  { id: 48, category: "makanan", indo: "Enak / Lezat", jp: "おいしい", roma: "Oishii", note: "Ungkapan saat makanan enak" },
+
+  // Hari & Waktu
+  { id: 49, category: "waktu", indo: "Hari ini", jp: "きょう", roma: "Kyou", note: "" },
+  { id: 50, category: "waktu", indo: "Besok", jp: "あした", roma: "Ashita", note: "" },
+  { id: 51, category: "waktu", indo: "Kemarin", jp: "きのう", roma: "Kinou", note: "" },
+  { id: 52, category: "waktu", indo: "Sekarang", jp: "いま", roma: "Ima", note: "" },
+  { id: 53, category: "waktu", indo: "Pagi", jp: "あさ", roma: "Asa", note: "" },
+  { id: 54, category: "waktu", indo: "Siang", jp: "ひる", roma: "Hiru", note: "" },
+  { id: 55, category: "waktu", indo: "Malam", jp: "よる", roma: "Yoru", note: "" },
+  { id: 56, category: "waktu", indo: "Senin", jp: "げつようび", roma: "Getsuyoubi", note: "月 (getsu) = bulan" },
+  { id: 57, category: "waktu", indo: "Selasa", jp: "かようび", roma: "Kayoubi", note: "火 (ka) = api" },
+  { id: 58, category: "waktu", indo: "Rabu", jp: "すいようび", roma: "Suiyoubi", note: "水 (sui) = air" },
+  { id: 59, category: "waktu", indo: "Kamis", jp: "もくようび", roma: "Mokuyoubi", note: "木 (moku) = kayu" },
+  { id: 60, category: "waktu", indo: "Jumat", jp: "きんようび", roma: "Kin'youbi", note: "金 (kin) = emas" },
+  { id: 61, category: "waktu", indo: "Sabtu", jp: "どようび", roma: "Doyoubi", note: "土 (do) = tanah" },
+  { id: 62, category: "waktu", indo: "Minggu", jp: "にちようび", roma: "Nichiyoubi", note: "日 (nichi) = matahari" },
+
+  // Kata sifat umum
+  { id: 63, category: "sifat", indo: "Besar", jp: "おおきい", roma: "Ookii", note: "" },
+  { id: 64, category: "sifat", indo: "Kecil", jp: "ちいさい", roma: "Chiisai", note: "" },
+  { id: 65, category: "sifat", indo: "Panas", jp: "あつい", roma: "Atsui", note: "Juga bisa berarti 'tebal'" },
+  { id: 66, category: "sifat", indo: "Dingin", jp: "さむい", roma: "Samui", note: "Cuaca dingin; つめたい (tsumetai) = dingin saat disentuh" },
+  { id: 67, category: "sifat", indo: "Cepat", jp: "はやい", roma: "Hayai", note: "" },
+  { id: 68, category: "sifat", indo: "Lambat", jp: "おそい", roma: "Osoi", note: "" },
+  { id: 69, category: "sifat", indo: "Cantik / Indah", jp: "きれい", roma: "Kirei", note: "Juga berarti 'bersih'" },
+  { id: 70, category: "sifat", indo: "Lucu / Imut", jp: "かわいい", roma: "Kawaii", note: "Terkenal dari budaya pop Jepang" },
+
+  // Frasa penting
+  { id: 71, category: "frasa", indo: "Nama saya ...", jp: "わたしの なまえは ... です", roma: "Watashi no namae wa ... desu", note: "Ganti '...' dengan namamu" },
+  { id: 72, category: "frasa", indo: "Saya tidak mengerti", jp: "わかりません", roma: "Wakarimasen", note: "" },
+  { id: 73, category: "frasa", indo: "Tolong ulangi", jp: "もういちど おねがいします", roma: "Mou ichido onegaishimasu", note: "" },
+  { id: 74, category: "frasa", indo: "Di mana ...?", jp: "... は どこですか", roma: "... wa doko desu ka", note: "Ganti '...' dengan tempat yang dicari" },
+  { id: 75, category: "frasa", indo: "Berapa harganya?", jp: "いくらですか", roma: "Ikura desu ka", note: "" },
+  { id: 76, category: "frasa", indo: "Saya suka", jp: "すきです", roma: "Suki desu", note: "" },
+  { id: 77, category: "frasa", indo: "Saya tidak suka", jp: "きらいです", roma: "Kirai desu", note: "" },
+  { id: 78, category: "frasa", indo: "Selamat makan", jp: "いただきます", roma: "Itadakimasu", note: "Diucapkan sebelum makan" },
+  { id: 79, category: "frasa", indo: "Sudah kenyang / Terima kasih", jp: "ごちそうさまでした", roma: "Gochisousama deshita", note: "Diucapkan setelah makan" },
+  { id: 80, category: "frasa", indo: "Ayo semangat!", jp: "がんばって！", roma: "Ganbatte!", note: "Ungkapan semangat paling populer" },
+];
+
+const VOCAB_CATEGORIES = [
+  { id: "all",      label: "Semua",         emoji: "📚" },
+  { id: "sapaan",   label: "Sapaan",        emoji: "👋" },
+  { id: "angka",    label: "Angka",         emoji: "🔢" },
+  { id: "warna",    label: "Warna",         emoji: "🎨" },
+  { id: "keluarga", label: "Keluarga",      emoji: "👨‍👩‍👧" },
+  { id: "makanan",  label: "Makanan",       emoji: "🍱" },
+  { id: "waktu",    label: "Hari & Waktu",  emoji: "🗓" },
+  { id: "sifat",    label: "Kata Sifat",    emoji: "✨" },
+  { id: "frasa",    label: "Frasa Penting", emoji: "💬" },
 ];
 
 const FEEDBACK_CORRECT = [
-  { face: "🌸", msg: "Benar! がんばれ！" },
-  { face: "⭐", msg: "Yesss! すごい！" },
-  { face: "🎉", msg: "Tepat sekali! えらい！" },
-  { face: "💯", msg: "Keren banget! 正解！" },
-  { face: "✨", msg: "Mantap! Orihime bangga!" },
+  { msg: "Tepat sekali! よくできました！" },
+  { msg: "Benar! すごい！" },
+  { msg: "Mantap! 正解！" },
+  { msg: "Yesss! えらい！" },
+  { msg: "Sempurna! がんばったね！" },
 ];
-
 const FEEDBACK_WRONG = [
-  { face: "😅", msg: "Hampir benar! 大丈夫！" },
-  { face: "💪", msg: "Next kali pasti bisa!" },
-  { face: "🍊", msg: "Jangan nyerah ya! ファイト！" },
-  { face: "😊", msg: "Yuk coba lagi! がんばれ！" },
+  { msg: "Hampir! 大丈夫、次は！" },
+  { msg: "Jangan nyerah! がんばれ！" },
+  { msg: "Next kali pasti bisa! ファイト！" },
+  { msg: "Coba lagi ya! もう一度！" },
 ];

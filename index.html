@@ -10,7 +10,7 @@
 </head>
 <body>
 
-  <!-- ===== LOGIN SCREEN ===== -->
+  <!-- LOGIN -->
   <div class="login-screen" id="loginScreen">
     <div class="login-deco-kana" aria-hidden="true">
       <span>あ</span><span>い</span><span>う</span><span>え</span><span>お</span>
@@ -22,30 +22,20 @@
         <span class="login-logo-name">Nihongo Yomi</span>
       </div>
       <h1 class="login-title">Selamat Datang! <span class="wave">👋</span></h1>
-      <p class="login-sub">Platform belajar Hiragana & Katakana<br/>yang bersih, tenang, dan menyenangkan.</p>
+      <p class="login-sub">Platform belajar Hiragana, Katakana & Kosakata Jepang yang tenang dan menyenangkan.</p>
       <div class="login-form">
         <label class="login-label" for="nameInput">Siapa namamu?</label>
-        <input
-          class="login-input"
-          id="nameInput"
-          type="text"
-          placeholder="Ketik namamu di sini..."
-          maxlength="24"
-          autocomplete="off"
-          autofocus
-        />
+        <input class="login-input" id="nameInput" type="text" placeholder="Ketik namamu di sini..." maxlength="24" autocomplete="off" autofocus />
         <button class="login-btn" id="loginBtn">Mulai Belajar →</button>
       </div>
       <p class="login-hint">Nama kamu akan dipakai untuk menyapa! 🌿</p>
     </div>
   </div>
 
-  <!-- ===== MAIN APP (hidden until login) ===== -->
+  <!-- APP -->
   <div class="app-wrap hidden" id="appWrap">
-
     <div class="bg-pattern"></div>
 
-    <!-- HEADER -->
     <header class="site-header">
       <div class="logo">
         <span class="logo-jp">日本語</span>
@@ -56,19 +46,54 @@
         <button class="nav-btn active" data-section="home">Beranda</button>
         <button class="nav-btn" data-section="hiragana">ひ Hiragana</button>
         <button class="nav-btn" data-section="katakana">カ Katakana</button>
+        <button class="nav-btn" data-section="vocab">📖 Kosakata</button>
         <button class="nav-btn" data-section="quiz">Kuis</button>
       </nav>
-      <div class="header-user">
+      <div class="header-right">
+        <div class="streak-badge" id="streakBadge" title="Streak belajar harianmu">
+          <span class="streak-fire">🔥</span>
+          <span class="streak-count" id="streakCount">0</span>
+        </div>
         <span class="user-greeting" id="headerGreeting">Halo!</span>
         <button class="btn-logout" id="logoutBtn" title="Ganti nama">↩</button>
       </div>
     </header>
 
-    <!-- MAIN -->
     <main class="main-content">
 
       <!-- HOME -->
       <section id="section-home" class="section active">
+        <!-- Streak banner -->
+        <div class="streak-banner" id="streakBanner">
+          <div class="streak-banner-left">
+            <span class="streak-banner-fire">🔥</span>
+            <div>
+              <div class="streak-banner-title" id="streakBannerTitle">Streak 0 hari</div>
+              <div class="streak-banner-sub" id="streakBannerSub">Belajar hari ini untuk memulai streak!</div>
+            </div>
+          </div>
+          <div class="streak-dots" id="streakDots"></div>
+        </div>
+
+        <!-- Progress summary -->
+        <div class="progress-summary" id="progressSummary">
+          <div class="prog-item">
+            <div class="prog-label">Hiragana</div>
+            <div class="prog-bar-wrap"><div class="prog-bar" id="progHiragana"></div></div>
+            <div class="prog-num" id="progHiraganaNum">0/46</div>
+          </div>
+          <div class="prog-item">
+            <div class="prog-label">Katakana</div>
+            <div class="prog-bar-wrap"><div class="prog-bar prog-bar-gold" id="progKatakana"></div></div>
+            <div class="prog-num" id="progKatakanaNum">0/46</div>
+          </div>
+          <div class="prog-item">
+            <div class="prog-label">Kosakata</div>
+            <div class="prog-bar-wrap"><div class="prog-bar prog-bar-teal" id="progVocab"></div></div>
+            <div class="prog-num" id="progVocabNum">0/80</div>
+          </div>
+        </div>
+
         <div class="hero">
           <div class="hero-kana-deco" aria-hidden="true">
             <span>あ</span><span>い</span><span>う</span>
@@ -77,14 +102,11 @@
           </div>
           <div class="hero-content">
             <p class="hero-eyebrow">Mulai perjalananmu</p>
-            <h1 class="hero-title">
-              Halo, <em id="heroName">Teman</em>! 🌿<br/>
-              Ayo kuasai <em>Hiragana</em><br/>& <em>Katakana</em>
-            </h1>
-            <p class="hero-sub">Pelajari 92 karakter aksara Jepang secara sistematis — dengan flashcard, grid interaktif, dan kuis adaptif.</p>
+            <h1 class="hero-title">Halo, <em id="heroName">Teman</em>! 🌿<br/>Ayo kuasai <em>Nihongo</em></h1>
+            <p class="hero-sub">Pelajari Hiragana, Katakana & kosakata dasar bahasa Jepang secara sistematis.</p>
             <div class="hero-buttons">
               <button class="btn-primary" data-section="hiragana">Mulai Hiragana</button>
-              <button class="btn-ghost" data-section="katakana">Katakana →</button>
+              <button class="btn-ghost" data-section="vocab">Lihat Kosakata →</button>
             </div>
           </div>
         </div>
@@ -92,44 +114,29 @@
         <div class="info-cards">
           <div class="info-card" data-target="hiragana">
             <div class="card-kana">あ</div>
-            <div class="card-body">
-              <div class="card-title">Hiragana</div>
-              <div class="card-desc">46 karakter dasar untuk kata-kata Jepang asli</div>
-            </div>
+            <div class="card-body"><div class="card-title">Hiragana</div><div class="card-desc">46 karakter dasar aksara Jepang</div></div>
             <div class="card-arrow">→</div>
           </div>
           <div class="info-card" data-target="katakana">
             <div class="card-kana">ア</div>
-            <div class="card-body">
-              <div class="card-title">Katakana</div>
-              <div class="card-desc">46 karakter untuk kata serapan asing</div>
-            </div>
+            <div class="card-body"><div class="card-title">Katakana</div><div class="card-desc">46 karakter untuk kata serapan</div></div>
+            <div class="card-arrow">→</div>
+          </div>
+          <div class="info-card" data-target="vocab">
+            <div class="card-kana">語</div>
+            <div class="card-body"><div class="card-title">Kosakata</div><div class="card-desc">80+ kata dasar dengan 8 kategori</div></div>
             <div class="card-arrow">→</div>
           </div>
           <div class="info-card" data-target="quiz">
             <div class="card-kana">？</div>
-            <div class="card-body">
-              <div class="card-title">Kuis Interaktif</div>
-              <div class="card-desc">Uji pemahamanmu dengan soal pilihan ganda</div>
-            </div>
-            <div class="card-arrow">→</div>
-          </div>
-          <div class="info-card" data-target="hiragana">
-            <div class="card-kana">⇄</div>
-            <div class="card-body">
-              <div class="card-title">Flashcard</div>
-              <div class="card-desc">Hafal efektif dengan metode kartu kilat</div>
-            </div>
+            <div class="card-body"><div class="card-title">Kuis</div><div class="card-desc">Uji pemahamanmu dengan timer</div></div>
             <div class="card-arrow">→</div>
           </div>
         </div>
 
-        <!-- Tips box -->
         <div class="tips-box">
           <div class="tips-icon">💡</div>
-          <div class="tips-text">
-            <strong>Tips belajar:</strong> Gunakan tombol <kbd>←</kbd> <kbd>→</kbd> dan <kbd>Spasi</kbd> untuk navigasi flashcard dengan cepat!
-          </div>
+          <div class="tips-text"><strong>Tips:</strong> Gunakan <kbd>←</kbd> <kbd>→</kbd> dan <kbd>Spasi</kbd> untuk navigasi flashcard dengan cepat!</div>
         </div>
       </section>
 
@@ -213,12 +220,30 @@
         </div>
       </section>
 
+      <!-- KOSAKATA -->
+      <section id="section-vocab" class="section">
+        <div class="section-header">
+          <div class="section-title-group">
+            <h2 class="section-title">Kosakata</h2>
+            <span class="jp-sub">ごい</span>
+          </div>
+          <p class="section-desc">Klik kartu untuk membalik dan lihat aksara Jepangnya. Klik 🔊 untuk mendengar.</p>
+          <div class="filter-tabs" id="vocabFilter"></div>
+        </div>
+        <div class="vocab-search-wrap">
+          <input class="vocab-search" id="vocabSearch" type="text" placeholder="Cari kata... (Indo atau Jepang)" />
+        </div>
+        <div class="vocab-grid" id="vocabGrid"></div>
+        <div class="vocab-empty hidden" id="vocabEmpty">Tidak ada kata yang cocok 🌿</div>
+      </section>
+
       <!-- QUIZ -->
       <section id="section-quiz" class="section">
         <div class="quiz-header">
           <h2 class="section-title">Kuis <span class="jp-sub">テスト</span></h2>
           <p class="section-desc">Pilih pengaturan dan uji kemampuanmu.</p>
         </div>
+
         <div class="quiz-setup" id="quizSetup">
           <div class="quiz-options">
             <div class="quiz-option-group">
@@ -244,11 +269,29 @@
                 <label class="radio-pill"><input type="radio" name="quizCount" value="46"/> Semua</label>
               </div>
             </div>
+            <div class="quiz-option-group">
+              <label>Timer per Soal</label>
+              <div class="radio-group">
+                <label class="radio-pill"><input type="radio" name="quizTimer" value="0" checked/> Tanpa Timer</label>
+                <label class="radio-pill"><input type="radio" name="quizTimer" value="10"/> 10 Detik</label>
+                <label class="radio-pill"><input type="radio" name="quizTimer" value="7"/> 7 Detik</label>
+                <label class="radio-pill"><input type="radio" name="quizTimer" value="5"/> 5 Detik</label>
+              </div>
+            </div>
           </div>
           <button class="btn-primary big" id="startQuiz">Mulai Kuis</button>
         </div>
 
         <div class="quiz-game hidden" id="quizGame">
+          <!-- Timer ring -->
+          <div class="timer-wrap hidden" id="timerWrap">
+            <svg class="timer-ring" viewBox="0 0 48 48">
+              <circle class="timer-bg" cx="24" cy="24" r="20"/>
+              <circle class="timer-arc" id="timerArc" cx="24" cy="24" r="20"/>
+            </svg>
+            <span class="timer-num" id="timerNum">10</span>
+          </div>
+
           <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="quizFill"></div></div>
           <div class="quiz-info">
             <span id="quizProgress">Soal 1/10</span>
@@ -259,9 +302,9 @@
             <p class="quiz-question-label" id="quizLabel">Apa romaji dari aksara ini?</p>
           </div>
           <div class="quiz-choices" id="quizChoices"></div>
-          <div class="quiz-feedback hidden" id="orihimeFeedback">
-            <div class="feedback-face" id="feedbackFace">✓</div>
-            <div class="feedback-msg" id="feedbackMsg">Tepat sekali!</div>
+          <div class="quiz-feedback hidden" id="quizFeedback">
+            <span class="feedback-face" id="feedbackFace">✓</span>
+            <span class="feedback-msg" id="feedbackMsg">Tepat!</span>
           </div>
         </div>
 
@@ -273,6 +316,7 @@
             <span id="resultPercent">80%</span>
           </div>
           <p id="resultMsg">Terus berlatih!</p>
+          <div class="result-breakdown" id="resultBreakdown"></div>
           <div class="result-actions">
             <button class="btn-primary big" id="retryQuiz">Coba Lagi</button>
             <button class="btn-ghost" id="backToSetup">Ganti Pengaturan</button>
@@ -281,7 +325,7 @@
       </section>
 
     </main>
-  </div><!-- /app-wrap -->
+  </div>
 
   <!-- POPUP -->
   <div class="card-popup hidden" id="cardPopup">
