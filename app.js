@@ -1,10 +1,79 @@
 // =============================================
-//  NIHONGO YOMI — APP LOGIC (Elegant Edition)
+//  NIHONGO YOMI — APP LOGIC (Matcha Edition)
 // =============================================
 
 document.addEventListener("DOMContentLoaded", () => {
 
-  /* ---- NAVIGATION ---- */
+  /* =============================================
+     LOGIN
+     ============================================= */
+  const loginScreen = document.getElementById("loginScreen");
+  const appWrap     = document.getElementById("appWrap");
+  const nameInput   = document.getElementById("nameInput");
+  const loginBtn    = document.getElementById("loginBtn");
+  const heroName    = document.getElementById("heroName");
+  const headerGreeting = document.getElementById("headerGreeting");
+  const logoutBtn   = document.getElementById("logoutBtn");
+
+  function capitalize(str) {
+    return str.trim().charAt(0).toUpperCase() + str.trim().slice(1);
+  }
+
+  function doLogin() {
+    const raw = nameInput.value.trim();
+    if (!raw) {
+      nameInput.classList.remove("shake");
+      void nameInput.offsetWidth; // reflow to restart animation
+      nameInput.classList.add("shake");
+      nameInput.focus();
+      return;
+    }
+    const name = capitalize(raw);
+
+    // Save to sessionStorage
+    sessionStorage.setItem("nihongoName", name);
+
+    // Update UI
+    heroName.textContent         = name;
+    headerGreeting.textContent   = `Halo, ${name}! 🌿`;
+
+    // Transition
+    loginScreen.style.transition = "opacity 0.4s ease, transform 0.4s ease";
+    loginScreen.style.opacity    = "0";
+    loginScreen.style.transform  = "scale(1.03)";
+    setTimeout(() => {
+      loginScreen.classList.add("hidden");
+      appWrap.classList.remove("hidden");
+      appWrap.style.animation = "fadeUp 0.4s ease";
+    }, 380);
+  }
+
+  loginBtn.addEventListener("click", doLogin);
+  nameInput.addEventListener("keydown", e => { if (e.key === "Enter") doLogin(); });
+  nameInput.addEventListener("animationend", () => nameInput.classList.remove("shake"));
+
+  logoutBtn.addEventListener("click", () => {
+    sessionStorage.removeItem("nihongoName");
+    appWrap.classList.add("hidden");
+    loginScreen.classList.remove("hidden");
+    loginScreen.style.opacity   = "1";
+    loginScreen.style.transform = "scale(1)";
+    nameInput.value = "";
+    nameInput.focus();
+  });
+
+  // Auto-login if name saved in session
+  const savedName = sessionStorage.getItem("nihongoName");
+  if (savedName) {
+    heroName.textContent       = savedName;
+    headerGreeting.textContent = `Halo, ${savedName}! 🌿`;
+    loginScreen.classList.add("hidden");
+    appWrap.classList.remove("hidden");
+  }
+
+  /* =============================================
+     NAVIGATION
+     ============================================= */
   const navBtns  = document.querySelectorAll(".nav-btn");
   const sections = document.querySelectorAll(".section");
 
@@ -16,31 +85,28 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   navBtns.forEach(b => b.addEventListener("click", () => showSection(b.dataset.section)));
-
-  // Hero buttons
   document.querySelectorAll("[data-section]").forEach(b => {
     if (b.tagName === "BUTTON") b.addEventListener("click", () => showSection(b.dataset.section));
   });
-
-  // Info cards
   document.querySelectorAll(".info-card[data-target]").forEach(card => {
     card.addEventListener("click", () => showSection(card.dataset.target));
   });
 
-  /* ---- BUILD CHARACTER GRIDS ---- */
+  /* =============================================
+     CHARACTER GRIDS
+     ============================================= */
   function buildGrid(data, containerId, type) {
     const container = document.getElementById(containerId);
     container.innerHTML = "";
     data.forEach(item => {
       const card = document.createElement("div");
-      card.className = "char-card";
+      card.className   = "char-card";
       card.dataset.group = item.group;
-      card.innerHTML = `<span class="char-jp">${item.char}</span><span class="char-roma">${item.roma}</span>`;
+      card.innerHTML   = `<span class="char-jp">${item.char}</span><span class="char-roma">${item.roma}</span>`;
       card.addEventListener("click", () => openPopup(item, type));
       container.appendChild(card);
     });
   }
-
   buildGrid(HIRAGANA, "hiraganaGrid", "Hiragana");
   buildGrid(KATAKANA, "katakanaGrid", "Katakana");
 
@@ -58,11 +124,12 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   }
-
   setupFilter("hiraganaFilter", "hiraganaGrid", HIRAGANA);
   setupFilter("katakanaFilter", "katakanaGrid", KATAKANA);
 
-  /* ---- POPUP ---- */
+  /* =============================================
+     POPUP
+     ============================================= */
   const popup        = document.getElementById("cardPopup");
   const popupOverlay = document.getElementById("popupOverlay");
 
@@ -78,10 +145,8 @@ document.addEventListener("DOMContentLoaded", () => {
     popup.classList.add("hidden");
     popupOverlay.classList.add("hidden");
   }
-
   document.getElementById("popupClose").addEventListener("click", closePopup);
   popupOverlay.addEventListener("click", closePopup);
-
   document.getElementById("popupSound").addEventListener("click", () => {
     speakJapanese(document.getElementById("popupChar").textContent);
     const btn = document.getElementById("popupSound");
@@ -89,23 +154,25 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => btn.textContent = "▶ Dengarkan", 1400);
   });
 
-  /* ---- TEXT-TO-SPEECH ---- */
+  /* =============================================
+     TEXT-TO-SPEECH
+     ============================================= */
   function speakJapanese(text) {
     if (!window.speechSynthesis) { showToast("Browser tidak mendukung TTS"); return; }
     window.speechSynthesis.cancel();
     const utter = new SpeechSynthesisUtterance(text);
     utter.lang = "ja-JP";
     utter.rate = 0.82;
-    const voices = window.speechSynthesis.getVoices();
-    const jp = voices.find(v => v.lang.startsWith("ja"));
+    const jp = window.speechSynthesis.getVoices().find(v => v.lang.startsWith("ja"));
     if (jp) utter.voice = jp;
     window.speechSynthesis.speak(utter);
   }
   if (window.speechSynthesis) window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
 
-  /* ---- FLASHCARD HIRAGANA ---- */
+  /* =============================================
+     FLASHCARD — HIRAGANA
+     ============================================= */
   let hIdx = 0, hFlipped = false;
-
   function updateHFlashcard() {
     const item = HIRAGANA[hIdx];
     document.getElementById("hFlashChar").textContent    = item.char;
@@ -115,22 +182,16 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("hFlashcard").classList.remove("flipped");
     hFlipped = false;
   }
-
-  document.getElementById("hFlashcard").addEventListener("click", () => {
-    hFlipped = !hFlipped;
-    document.getElementById("hFlashcard").classList.toggle("flipped", hFlipped);
-  });
-  document.getElementById("hFlip").addEventListener("click", () => {
-    hFlipped = !hFlipped;
-    document.getElementById("hFlashcard").classList.toggle("flipped", hFlipped);
-  });
+  document.getElementById("hFlashcard").addEventListener("click", () => { hFlipped = !hFlipped; document.getElementById("hFlashcard").classList.toggle("flipped", hFlipped); });
+  document.getElementById("hFlip").addEventListener("click", () => { hFlipped = !hFlipped; document.getElementById("hFlashcard").classList.toggle("flipped", hFlipped); });
   document.getElementById("hNext").addEventListener("click", () => { hIdx = (hIdx+1) % HIRAGANA.length; updateHFlashcard(); });
   document.getElementById("hPrev").addEventListener("click", () => { hIdx = (hIdx-1+HIRAGANA.length) % HIRAGANA.length; updateHFlashcard(); });
   updateHFlashcard();
 
-  /* ---- FLASHCARD KATAKANA ---- */
+  /* =============================================
+     FLASHCARD — KATAKANA
+     ============================================= */
   let kIdx = 0, kFlipped = false;
-
   function updateKFlashcard() {
     const item = KATAKANA[kIdx];
     document.getElementById("kFlashChar").textContent = item.char;
@@ -139,38 +200,28 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("kFlashcard").classList.remove("flipped");
     kFlipped = false;
   }
-
-  document.getElementById("kFlashcard").addEventListener("click", () => {
-    kFlipped = !kFlipped;
-    document.getElementById("kFlashcard").classList.toggle("flipped", kFlipped);
-  });
-  document.getElementById("kFlip").addEventListener("click", () => {
-    kFlipped = !kFlipped;
-    document.getElementById("kFlashcard").classList.toggle("flipped", kFlipped);
-  });
+  document.getElementById("kFlashcard").addEventListener("click", () => { kFlipped = !kFlipped; document.getElementById("kFlashcard").classList.toggle("flipped", kFlipped); });
+  document.getElementById("kFlip").addEventListener("click", () => { kFlipped = !kFlipped; document.getElementById("kFlashcard").classList.toggle("flipped", kFlipped); });
   document.getElementById("kNext").addEventListener("click", () => { kIdx = (kIdx+1) % KATAKANA.length; updateKFlashcard(); });
   document.getElementById("kPrev").addEventListener("click", () => { kIdx = (kIdx-1+KATAKANA.length) % KATAKANA.length; updateKFlashcard(); });
   updateKFlashcard();
 
-  /* ---- QUIZ ---- */
-  let quizQuestions = [], quizCurrentIndex = 0, quizScore = 0, quizWrong = 0;
+  /* =============================================
+     QUIZ
+     ============================================= */
+  let quizQuestions = [], quizIdx = 0, quizScore = 0, quizWrong = 0;
   let quizMode = "", quizAnswered = false;
 
-  const quizSetupEl  = document.getElementById("quizSetup");
-  const quizGameEl   = document.getElementById("quizGame");
-  const quizResultEl = document.getElementById("quizResult");
-
   function shuffle(arr) { return [...arr].sort(() => Math.random() - 0.5); }
-
   function buildChoices(correct, pool) {
     const others = pool.filter(p => p.roma !== correct.roma).sort(() => Math.random() - 0.5).slice(0, 3);
     return shuffle([correct, ...others]);
   }
 
   function showQuestion() {
-    const q = quizQuestions[quizCurrentIndex];
-    document.getElementById("quizFill").style.width = (quizCurrentIndex / quizQuestions.length * 100) + "%";
-    document.getElementById("quizProgress").textContent = `Soal ${quizCurrentIndex+1}/${quizQuestions.length}`;
+    const q = quizQuestions[quizIdx];
+    document.getElementById("quizFill").style.width = (quizIdx / quizQuestions.length * 100) + "%";
+    document.getElementById("quizProgress").textContent = `Soal ${quizIdx+1}/${quizQuestions.length}`;
     document.getElementById("quizScore").textContent    = `✓ ${quizScore}  ✗ ${quizWrong}`;
     document.getElementById("orihimeFeedback").classList.add("hidden");
     quizAnswered = false;
@@ -185,10 +236,9 @@ document.addEventListener("DOMContentLoaded", () => {
       qEl.style.fontSize   = "5rem";
       qEl.textContent      = q.char;
       document.getElementById("quizLabel").textContent = "Apa romaji dari aksara ini?";
-
       choices.forEach(c => {
         const btn = document.createElement("button");
-        btn.className = "choice-btn";
+        btn.className   = "choice-btn";
         btn.textContent = c.roma;
         btn.addEventListener("click", () => checkAnswer(btn, c.roma === q.roma, q.roma));
         choicesEl.appendChild(btn);
@@ -199,13 +249,12 @@ document.addEventListener("DOMContentLoaded", () => {
       qEl.style.fontSize   = "2.8rem";
       qEl.textContent      = q.roma;
       document.getElementById("quizLabel").textContent = "Pilih aksara yang benar!";
-
       choices.forEach(c => {
         const btn = document.createElement("button");
-        btn.className = "choice-btn";
+        btn.className        = "choice-btn";
         btn.style.fontFamily = "var(--font-jp)";
         btn.style.fontSize   = "2rem";
-        btn.textContent = c.char;
+        btn.textContent      = c.char;
         btn.addEventListener("click", () => checkAnswer(btn, c.char === q.char, q.char));
         choicesEl.appendChild(btn);
       });
@@ -215,26 +264,25 @@ document.addEventListener("DOMContentLoaded", () => {
   function checkAnswer(clickedBtn, isCorrect, correctAnswer) {
     if (quizAnswered) return;
     quizAnswered = true;
-
     document.querySelectorAll(".choice-btn").forEach(b => {
       b.disabled = true;
       if (b.textContent === correctAnswer) b.classList.add("correct");
     });
-
     if (isCorrect) {
       clickedBtn.classList.add("correct");
       quizScore++;
-      showFeedback("✓", FEEDBACK_CORRECT[Math.floor(Math.random()*FEEDBACK_CORRECT.length)].msg);
-      speakJapanese(quizQuestions[quizCurrentIndex].char);
+      const fb = FEEDBACK_CORRECT[Math.floor(Math.random()*FEEDBACK_CORRECT.length)];
+      showFeedback("✓", fb.msg);
+      speakJapanese(quizQuestions[quizIdx].char);
     } else {
       clickedBtn.classList.add("wrong");
       quizWrong++;
-      showFeedback("✗", FEEDBACK_WRONG[Math.floor(Math.random()*FEEDBACK_WRONG.length)].msg);
+      const fb = FEEDBACK_WRONG[Math.floor(Math.random()*FEEDBACK_WRONG.length)];
+      showFeedback("✗", fb.msg);
     }
-
     setTimeout(() => {
-      quizCurrentIndex++;
-      if (quizCurrentIndex >= quizQuestions.length) showResult();
+      quizIdx++;
+      if (quizIdx >= quizQuestions.length) showResult();
       else showQuestion();
     }, 1500);
   }
@@ -246,56 +294,54 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function showResult() {
-    quizGameEl.classList.add("hidden");
-    quizResultEl.classList.remove("hidden");
+    document.getElementById("quizGame").classList.add("hidden");
+    document.getElementById("quizResult").classList.remove("hidden");
     const total   = quizScore + quizWrong;
     const percent = Math.round((quizScore / total) * 100);
     document.getElementById("resultScore").textContent   = `${quizScore}/${total}`;
     document.getElementById("resultPercent").textContent = `${percent}%`;
-    document.getElementById("quizFill").style.width = "100%";
-
+    document.getElementById("quizFill").style.width      = "100%";
     let title, msg;
-    if (percent === 100) { title = "Sempurna!"; msg = "Penguasaan penuh. Luar biasa."; }
-    else if (percent >= 80) { title = "Sangat Baik"; msg = "Hampir sempurna. Sedikit lagi!"; }
-    else if (percent >= 60) { title = "Cukup Baik"; msg = "Fondasi yang bagus. Terus berlatih."; }
-    else if (percent >= 40) { title = "Terus Berlatih"; msg = "Konsistensi adalah kunci. Jangan berhenti."; }
-    else                   { title = "Mulai Lagi"; msg = "Tinjau kembali materi dan coba lagi."; }
-
+    if (percent === 100) { title = "Sempurna! 🌿"; msg = "Penguasaan penuh. Luar biasa sekali!"; }
+    else if (percent >= 80) { title = "Sangat Baik"; msg = "Hampir sempurna. Terus berlatih!"; }
+    else if (percent >= 60) { title = "Cukup Baik"; msg = "Fondasi bagus. Sedikit lagi!"; }
+    else if (percent >= 40) { title = "Terus Berjuang"; msg = "Konsistensi adalah kuncinya."; }
+    else                   { title = "Mulai Lagi"; msg = "Tinjau kembali materi dulu ya."; }
     document.getElementById("resultTitle").textContent = title;
     document.getElementById("resultMsg").textContent   = msg;
   }
 
   document.getElementById("startQuiz").addEventListener("click", () => {
-    const type  = document.querySelector('[name="quizType"]:checked').value;
-    quizMode    = document.querySelector('[name="quizMode"]:checked').value;
-    const count = parseInt(document.querySelector('[name="quizCount"]:checked').value);
-
-    let pool = type === "hiragana" ? [...HIRAGANA] : type === "katakana" ? [...KATAKANA] : [...HIRAGANA, ...KATAKANA];
-    quizQuestions    = shuffle(pool).slice(0, Math.min(count, pool.length));
-    quizCurrentIndex = 0; quizScore = 0; quizWrong = 0;
-
-    quizSetupEl.classList.add("hidden");
-    quizResultEl.classList.add("hidden");
-    quizGameEl.classList.remove("hidden");
+    const type = document.querySelector('[name="quizType"]:checked').value;
+    quizMode   = document.querySelector('[name="quizMode"]:checked').value;
+    const cnt  = parseInt(document.querySelector('[name="quizCount"]:checked').value);
+    let pool   = type === "hiragana" ? [...HIRAGANA] : type === "katakana" ? [...KATAKANA] : [...HIRAGANA, ...KATAKANA];
+    quizQuestions = shuffle(pool).slice(0, Math.min(cnt, pool.length));
+    quizIdx = 0; quizScore = 0; quizWrong = 0;
+    document.getElementById("quizSetup").classList.add("hidden");
+    document.getElementById("quizResult").classList.add("hidden");
+    document.getElementById("quizGame").classList.remove("hidden");
     document.getElementById("quizFill").style.width = "0%";
     showQuestion();
   });
 
   document.getElementById("retryQuiz").addEventListener("click", () => {
-    quizQuestions    = shuffle(quizQuestions);
-    quizCurrentIndex = 0; quizScore = 0; quizWrong = 0;
-    quizResultEl.classList.add("hidden");
-    quizGameEl.classList.remove("hidden");
+    quizQuestions = shuffle(quizQuestions);
+    quizIdx = 0; quizScore = 0; quizWrong = 0;
+    document.getElementById("quizResult").classList.add("hidden");
+    document.getElementById("quizGame").classList.remove("hidden");
     document.getElementById("quizFill").style.width = "0%";
     showQuestion();
   });
 
   document.getElementById("backToSetup").addEventListener("click", () => {
-    quizResultEl.classList.add("hidden");
-    quizSetupEl.classList.remove("hidden");
+    document.getElementById("quizResult").classList.add("hidden");
+    document.getElementById("quizSetup").classList.remove("hidden");
   });
 
-  /* ---- TOAST ---- */
+  /* =============================================
+     TOAST
+     ============================================= */
   function showToast(msg, duration = 2800) {
     const toast = document.getElementById("toast");
     toast.textContent = msg;
@@ -304,7 +350,9 @@ document.addEventListener("DOMContentLoaded", () => {
     showToast._t = setTimeout(() => toast.classList.add("hidden"), duration);
   }
 
-  /* ---- KEYBOARD SHORTCUTS ---- */
+  /* =============================================
+     KEYBOARD SHORTCUTS
+     ============================================= */
   document.addEventListener("keydown", e => {
     const active = document.querySelector(".section.active")?.id;
     if (active === "section-hiragana") {
@@ -320,5 +368,5 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.key === "Escape") closePopup();
   });
 
-  setTimeout(() => showToast("Tip: Gunakan ← → dan Spasi untuk flashcard"), 1800);
+  setTimeout(() => showToast("Tip: ← → Spasi untuk navigasi flashcard!"), 2000);
 });
