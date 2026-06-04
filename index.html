@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<!-- ===== LOGIN ===== -->
+<!-- LOGIN -->
 <div class="login-screen" id="loginScreen">
   <div class="login-deco-kana" aria-hidden="true">
     <span>あ</span><span>い</span><span>う</span><span>え</span><span>お</span>
@@ -32,133 +32,158 @@
   </div>
 </div>
 
-<!-- ===== APP ===== -->
+<!-- APP -->
 <div class="app-wrap hidden" id="appWrap">
   <div class="bg-pattern"></div>
 
-  <header class="site-header">
+  <!-- MOBILE TOP BAR -->
+  <header class="mobile-topbar">
     <div class="logo">
       <span class="logo-jp">日本語</span>
       <span class="logo-divider"></span>
       <span class="logo-text">Nihongo Yomi</span>
     </div>
-    <nav class="main-nav">
-      <button class="nav-btn active" data-section="home">Beranda</button>
-      <button class="nav-btn" data-section="hiragana">ひ Hiragana</button>
-      <button class="nav-btn" data-section="katakana">カ Katakana</button>
-      <button class="nav-btn" data-section="vocab">📖 Kosakata</button>
-      <button class="nav-btn" data-section="budaya">🌸 Budaya</button>
-      <button class="nav-btn" data-section="favorit">⭐ Favorit</button>
-      <button class="nav-btn" data-section="quiz">🎯 Kuis</button>
-    </nav>
-    <div class="header-right">
-      <div class="streak-badge" id="streakBadge" title="Streak belajarmu">
-        <span>🔥</span><span class="streak-count" id="streakCount">0</span>
-      </div>
-      <button class="badge-bell" id="badgeBell" title="Pencapaianku">🏅 <span id="badgeNewDot" class="badge-new-dot hidden"></span></button>
-      <span class="user-greeting" id="headerGreeting">Halo!</span>
+    <div class="mobile-topbar-right">
+      <div class="streak-badge" id="streakBadge">🔥 <span id="streakCount">0</span></div>
+      <button class="badge-bell" id="badgeBell">🏅<span class="badge-new-dot hidden" id="badgeNewDot"></span></button>
       <button class="btn-logout" id="logoutBtn" title="Ganti nama">↩</button>
     </div>
   </header>
 
-  <main class="main-content">
+  <!-- LAYOUT: SIDEBAR + CONTENT -->
+  <div class="app-layout">
 
-    <!-- ===== HOME ===== -->
-    <section id="section-home" class="section active">
-
-      <!-- Daily Word -->
-      <div class="daily-word-box" id="dailyWordBox">
-        <div class="daily-label">🎲 Kata Hari Ini</div>
-        <div class="daily-jp" id="dailyJp">—</div>
-        <div class="daily-roma" id="dailyRoma">—</div>
-        <div class="daily-indo" id="dailyIndo">—</div>
-        <button class="daily-sound" id="dailySound">▶ Dengarkan</button>
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-user" id="sidebarUser">
+        <div class="sidebar-avatar" id="sidebarAvatar">L</div>
+        <div class="sidebar-info">
+          <div class="sidebar-name" id="sidebarName">Lenn</div>
+          <div class="sidebar-streak"><span>🔥</span> <span id="sidebarStreakNum">0</span> hari</div>
+        </div>
       </div>
 
-      <!-- Streak Banner -->
-      <div class="streak-banner" id="streakBanner">
-        <div class="streak-banner-left">
-          <span class="streak-banner-fire">🔥</span>
-          <div>
-            <div class="streak-banner-title" id="streakBannerTitle">Streak 0 hari</div>
-            <div class="streak-banner-sub" id="streakBannerSub">Belajar hari ini untuk memulai streak!</div>
+      <nav class="sidebar-nav">
+        <button class="sidebar-btn active" data-section="home">
+          <span class="sb-icon">🏠</span><span class="sb-label">Beranda</span>
+        </button>
+        <div class="sidebar-group-label">Aksara</div>
+        <button class="sidebar-btn" data-section="hiragana">
+          <span class="sb-icon sb-jp">ひ</span><span class="sb-label">Hiragana</span>
+        </button>
+        <button class="sidebar-btn" data-section="katakana">
+          <span class="sb-icon sb-jp">カ</span><span class="sb-label">Katakana</span>
+        </button>
+        <div class="sidebar-group-label">Belajar</div>
+        <button class="sidebar-btn" data-section="vocab">
+          <span class="sb-icon">📖</span><span class="sb-label">Kosakata</span>
+        </button>
+        <button class="sidebar-btn" data-section="budaya">
+          <span class="sb-icon">🌸</span><span class="sb-label">Budaya</span>
+        </button>
+        <button class="sidebar-btn" data-section="favorit">
+          <span class="sb-icon">⭐</span><span class="sb-label">Favorit</span>
+        </button>
+        <button class="sidebar-btn" data-section="quiz">
+          <span class="sb-icon">🎯</span><span class="sb-label">Kuis</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <button class="sidebar-logout" id="sidebarLogout">↩ Ganti nama</button>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content" id="mainContent">
+
+      <!-- HOME -->
+      <section id="section-home" class="section active">
+        <div class="page-header">
+          <h1 class="page-title">Beranda</h1>
+          <div class="header-badges-row">
+            <div class="streak-badge-lg" id="streakBadgeLg">🔥 <span id="streakCountLg">0</span> hari</div>
+            <button class="badge-bell-lg" id="badgeBellLg">🏅 Pencapaian <span class="badge-new-dot hidden" id="badgeNewDotLg"></span></button>
           </div>
         </div>
-        <div class="streak-dots" id="streakDots"></div>
-      </div>
 
-      <!-- Progress -->
-      <div class="progress-summary">
-        <div class="prog-item">
-          <div class="prog-label">Hiragana</div>
-          <div class="prog-bar-wrap"><div class="prog-bar" id="progHiragana"></div></div>
-          <div class="prog-num" id="progHiraganaNum">0/46</div>
+        <div class="daily-word-box" id="dailyWordBox">
+          <div class="daily-label">🎲 Kata Hari Ini</div>
+          <div class="daily-jp" id="dailyJp">—</div>
+          <div class="daily-roma" id="dailyRoma">—</div>
+          <div class="daily-indo" id="dailyIndo">—</div>
+          <button class="daily-sound" id="dailySound">▶ Dengarkan</button>
         </div>
-        <div class="prog-item">
-          <div class="prog-label">Katakana</div>
-          <div class="prog-bar-wrap"><div class="prog-bar prog-bar-gold" id="progKatakana"></div></div>
-          <div class="prog-num" id="progKatakanaNum">0/46</div>
-        </div>
-        <div class="prog-item">
-          <div class="prog-label">Kosakata</div>
-          <div class="prog-bar-wrap"><div class="prog-bar prog-bar-teal" id="progVocab"></div></div>
-          <div class="prog-num" id="progVocabNum">0/80</div>
-        </div>
-        <div class="prog-item">
-          <div class="prog-label">Budaya</div>
-          <div class="prog-bar-wrap"><div class="prog-bar prog-bar-rose" id="progBudaya"></div></div>
-          <div class="prog-num" id="progBudayaNum">0/12</div>
-        </div>
-      </div>
 
-      <!-- Quiz History Chart -->
-      <div class="chart-box">
-        <div class="chart-title">Grafik Skor Kuis</div>
-        <div class="chart-wrap" id="quizChartWrap">
-          <canvas id="quizChart" height="160"></canvas>
+        <div class="streak-banner" id="streakBanner">
+          <div class="streak-banner-left">
+            <span class="streak-banner-fire">🔥</span>
+            <div>
+              <div class="streak-banner-title" id="streakBannerTitle">Streak 0 hari</div>
+              <div class="streak-banner-sub" id="streakBannerSub">Belajar hari ini untuk memulai streak!</div>
+            </div>
+          </div>
+          <div class="streak-dots" id="streakDots"></div>
         </div>
-        <div class="chart-empty hidden" id="chartEmpty">Belum ada data kuis. Mulai kuis untuk melihat grafik! 🌿</div>
-      </div>
 
-      <!-- Hero -->
-      <div class="hero">
-        <div class="hero-kana-deco" aria-hidden="true">
-          <span>あ</span><span>い</span><span>う</span>
-          <span>か</span><span>き</span><span>く</span>
-          <span>さ</span><span>し</span><span>す</span>
-        </div>
-        <div class="hero-content">
-          <p class="hero-eyebrow">Mulai perjalananmu</p>
-          <h1 class="hero-title">Halo, <em id="heroName">Teman</em>! 🌿<br/>Ayo kuasai <em>Nihongo</em></h1>
-          <p class="hero-sub">Pelajari Hiragana, Katakana, kosakata & budaya Jepang secara sistematis.</p>
-          <div class="hero-buttons">
-            <button class="btn-primary" data-section="hiragana">Mulai Hiragana</button>
-            <button class="btn-ghost" data-section="budaya">Jelajah Budaya →</button>
+        <div class="progress-summary">
+          <div class="prog-item">
+            <div class="prog-label">Hiragana</div>
+            <div class="prog-bar-wrap"><div class="prog-bar" id="progHiragana"></div></div>
+            <div class="prog-num" id="progHiraganaNum">0/46</div>
+          </div>
+          <div class="prog-item">
+            <div class="prog-label">Katakana</div>
+            <div class="prog-bar-wrap"><div class="prog-bar prog-bar-gold" id="progKatakana"></div></div>
+            <div class="prog-num" id="progKatakanaNum">0/46</div>
+          </div>
+          <div class="prog-item">
+            <div class="prog-label">Kosakata</div>
+            <div class="prog-bar-wrap"><div class="prog-bar prog-bar-teal" id="progVocab"></div></div>
+            <div class="prog-num" id="progVocabNum">0/62</div>
+          </div>
+          <div class="prog-item">
+            <div class="prog-label">Budaya</div>
+            <div class="prog-bar-wrap"><div class="prog-bar prog-bar-rose" id="progBudaya"></div></div>
+            <div class="prog-num" id="progBudayaNum">0/12</div>
           </div>
         </div>
-      </div>
 
-      <!-- Info Cards -->
-      <div class="info-cards">
-        <div class="info-card" data-target="hiragana"><div class="card-kana">あ</div><div class="card-body"><div class="card-title">Hiragana</div><div class="card-desc">46 karakter dasar aksara Jepang</div></div><div class="card-arrow">→</div></div>
-        <div class="info-card" data-target="katakana"><div class="card-kana">ア</div><div class="card-body"><div class="card-title">Katakana</div><div class="card-desc">46 karakter untuk kata serapan</div></div><div class="card-arrow">→</div></div>
-        <div class="info-card" data-target="vocab"><div class="card-kana">語</div><div class="card-body"><div class="card-title">Kosakata</div><div class="card-desc">80+ kata dasar 8 kategori</div></div><div class="card-arrow">→</div></div>
-        <div class="info-card" data-target="budaya"><div class="card-kana">文</div><div class="card-body"><div class="card-title">Budaya</div><div class="card-desc">Etiket & tradisi Jepang</div></div><div class="card-arrow">→</div></div>
-        <div class="info-card" data-target="favorit"><div class="card-kana">⭐</div><div class="card-body"><div class="card-title">Favorit</div><div class="card-desc">Kartu yang kamu tandai</div></div><div class="card-arrow">→</div></div>
-        <div class="info-card" data-target="quiz"><div class="card-kana">？</div><div class="card-body"><div class="card-title">Kuis</div><div class="card-desc">Uji kemampuanmu dengan timer</div></div><div class="card-arrow">→</div></div>
-      </div>
+        <div class="chart-box">
+          <div class="chart-title">Grafik Skor Kuis</div>
+          <div class="chart-wrap" id="quizChartWrap">
+            <canvas id="quizChart" height="140"></canvas>
+          </div>
+          <div class="chart-empty hidden" id="chartEmpty">Belum ada data kuis. Mulai kuis untuk melihat grafik! 🌿</div>
+        </div>
 
-      <div class="tips-box">
-        <div class="tips-icon">💡</div>
-        <div class="tips-text"><strong>Tips:</strong> Gunakan <kbd>←</kbd> <kbd>→</kbd> dan <kbd>Spasi</kbd> untuk navigasi flashcard!</div>
-      </div>
-    </section>
+        <div class="hero">
+          <div class="hero-kana-deco" aria-hidden="true">
+            <span>あ</span><span>い</span><span>う</span>
+            <span>か</span><span>き</span><span>く</span>
+            <span>さ</span><span>し</span><span>す</span>
+          </div>
+          <div class="hero-content">
+            <p class="hero-eyebrow">Mulai perjalananmu</p>
+            <h1 class="hero-title">Halo, <em id="heroName">Teman</em>! 🌿<br/>Ayo kuasai <em>Nihongo</em></h1>
+            <p class="hero-sub">Pelajari Hiragana, Katakana, kosakata & budaya Jepang secara sistematis.</p>
+            <div class="hero-buttons">
+              <button class="btn-primary" data-section="hiragana">Mulai Hiragana</button>
+              <button class="btn-ghost" data-section="budaya">Jelajah Budaya →</button>
+            </div>
+          </div>
+        </div>
 
-    <!-- ===== HIRAGANA ===== -->
-    <section id="section-hiragana" class="section">
-      <div class="section-header">
-        <div class="section-title-group"><h2 class="section-title">Hiragana</h2><span class="jp-sub">ひらがな</span></div>
-        <p class="section-desc">Klik karakter untuk detail & dengarkan pelafalan. Klik ⭐ untuk favorit.</p>
+        <div class="tips-box">
+          <div class="tips-icon">💡</div>
+          <div class="tips-text"><strong>Tips:</strong> Gunakan <kbd>←</kbd> <kbd>→</kbd> dan <kbd>Spasi</kbd> untuk navigasi flashcard!</div>
+        </div>
+      </section>
+
+      <!-- HIRAGANA -->
+      <section id="section-hiragana" class="section">
+        <div class="page-header"><h1 class="page-title">Hiragana <span class="jp-sub">ひらがな</span></h1></div>
+        <p class="section-desc">Klik karakter untuk detail & dengarkan. Klik ⭐ untuk favorit.</p>
         <div class="filter-tabs" id="hiraganaFilter">
           <button class="filter-btn active" data-group="all">Semua</button>
           <button class="filter-btn" data-group="vowel">Vokal</button>
@@ -172,30 +197,28 @@
           <button class="filter-btn" data-group="r">R-</button>
           <button class="filter-btn" data-group="w">W-</button>
         </div>
-      </div>
-      <div class="char-grid" id="hiraganaGrid"></div>
-      <div class="flashcard-section">
-        <h3 class="fc-heading">Flashcard</h3>
-        <div class="flashcard-box">
-          <div class="flashcard" id="hFlashcard">
-            <div class="flashcard-front"><span id="hFlashChar">あ</span></div>
-            <div class="flashcard-back"><span id="hFlashRoma">a</span><span id="hFlashMeaning"></span></div>
+        <div class="char-grid" id="hiraganaGrid"></div>
+        <div class="flashcard-section">
+          <h3 class="fc-heading">Flashcard</h3>
+          <div class="flashcard-box">
+            <div class="flashcard" id="hFlashcard">
+              <div class="flashcard-front"><span id="hFlashChar">あ</span></div>
+              <div class="flashcard-back"><span id="hFlashRoma">a</span><span id="hFlashMeaning"></span></div>
+            </div>
+          </div>
+          <div class="flashcard-controls">
+            <button class="btn-fc" id="hPrev">← Sebelumnya</button>
+            <span class="fc-counter" id="hCounter">1 / 46</span>
+            <button class="btn-fc" id="hFlip">Balik</button>
+            <button class="btn-fc" id="hNext">Berikutnya →</button>
           </div>
         </div>
-        <div class="flashcard-controls">
-          <button class="btn-fc" id="hPrev">← Sebelumnya</button>
-          <span class="fc-counter" id="hCounter">1 / 46</span>
-          <button class="btn-fc" id="hFlip">Balik</button>
-          <button class="btn-fc" id="hNext">Berikutnya →</button>
-        </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- ===== KATAKANA ===== -->
-    <section id="section-katakana" class="section">
-      <div class="section-header">
-        <div class="section-title-group"><h2 class="section-title">Katakana</h2><span class="jp-sub">カタカナ</span></div>
-        <p class="section-desc">Klik karakter untuk detail & dengarkan pelafalan. Klik ⭐ untuk favorit.</p>
+      <!-- KATAKANA -->
+      <section id="section-katakana" class="section">
+        <div class="page-header"><h1 class="page-title">Katakana <span class="jp-sub">カタカナ</span></h1></div>
+        <p class="section-desc">Klik karakter untuk detail & dengarkan. Klik ⭐ untuk favorit.</p>
         <div class="filter-tabs" id="katakanaFilter">
           <button class="filter-btn active" data-group="all">Semua</button>
           <button class="filter-btn" data-group="vowel">Vokal</button>
@@ -209,143 +232,148 @@
           <button class="filter-btn" data-group="r">R-</button>
           <button class="filter-btn" data-group="w">W-</button>
         </div>
-      </div>
-      <div class="char-grid" id="katakanaGrid"></div>
-      <div class="flashcard-section">
-        <h3 class="fc-heading">Flashcard</h3>
-        <div class="flashcard-box">
-          <div class="flashcard" id="kFlashcard">
-            <div class="flashcard-front"><span id="kFlashChar">ア</span></div>
-            <div class="flashcard-back"><span id="kFlashRoma">a</span></div>
+        <div class="char-grid" id="katakanaGrid"></div>
+        <div class="flashcard-section">
+          <h3 class="fc-heading">Flashcard</h3>
+          <div class="flashcard-box">
+            <div class="flashcard" id="kFlashcard">
+              <div class="flashcard-front"><span id="kFlashChar">ア</span></div>
+              <div class="flashcard-back"><span id="kFlashRoma">a</span></div>
+            </div>
+          </div>
+          <div class="flashcard-controls">
+            <button class="btn-fc" id="kPrev">← Sebelumnya</button>
+            <span class="fc-counter" id="kCounter">1 / 46</span>
+            <button class="btn-fc" id="kFlip">Balik</button>
+            <button class="btn-fc" id="kNext">Berikutnya →</button>
           </div>
         </div>
-        <div class="flashcard-controls">
-          <button class="btn-fc" id="kPrev">← Sebelumnya</button>
-          <span class="fc-counter" id="kCounter">1 / 46</span>
-          <button class="btn-fc" id="kFlip">Balik</button>
-          <button class="btn-fc" id="kNext">Berikutnya →</button>
-        </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- ===== KOSAKATA ===== -->
-    <section id="section-vocab" class="section">
-      <div class="section-header">
-        <div class="section-title-group"><h2 class="section-title">Kosakata</h2><span class="jp-sub">ごい</span></div>
+      <!-- KOSAKATA -->
+      <section id="section-vocab" class="section">
+        <div class="page-header"><h1 class="page-title">Kosakata <span class="jp-sub">ごい</span></h1></div>
         <p class="section-desc">Klik kartu atau ▶ untuk mendengar. Klik ⭐ untuk favorit.</p>
         <div class="filter-tabs" id="vocabFilter"></div>
-      </div>
-      <div class="vocab-search-wrap"><input class="vocab-search" id="vocabSearch" type="text" placeholder="Cari kata... (Indo atau Jepang)"/></div>
-      <div class="vocab-grid" id="vocabGrid"></div>
-      <div class="vocab-empty hidden" id="vocabEmpty">Tidak ada kata yang cocok 🌿</div>
-    </section>
+        <div class="vocab-search-wrap"><input class="vocab-search" id="vocabSearch" type="text" placeholder="Cari kata... (Indo atau Jepang)"/></div>
+        <div class="vocab-grid" id="vocabGrid"></div>
+        <div class="vocab-empty hidden" id="vocabEmpty">Tidak ada kata yang cocok 🌿</div>
+      </section>
 
-    <!-- ===== BUDAYA ===== -->
-    <section id="section-budaya" class="section">
-      <div class="section-header">
-        <div class="section-title-group"><h2 class="section-title">Budaya Jepang</h2><span class="jp-sub">文化</span></div>
-        <p class="section-desc">Kenali etiket, tradisi, dan keunikan budaya Jepang sebelum bertemu langsung.</p>
+      <!-- BUDAYA -->
+      <section id="section-budaya" class="section">
+        <div class="page-header"><h1 class="page-title">Budaya Jepang <span class="jp-sub">文化</span></h1></div>
+        <p class="section-desc">Kenali etiket, tradisi, dan keunikan budaya Jepang.</p>
         <div class="filter-tabs" id="budayaFilter"></div>
-      </div>
-      <div class="budaya-grid" id="budayaGrid"></div>
-    </section>
+        <div class="budaya-grid" id="budayaGrid"></div>
+      </section>
 
-    <!-- ===== FAVORIT ===== -->
-    <section id="section-favorit" class="section">
-      <div class="section-header">
-        <div class="section-title-group"><h2 class="section-title">Favorit</h2><span class="jp-sub">お気に入り</span></div>
-        <p class="section-desc">Kartu aksara & kosakata yang kamu tandai ⭐ akan muncul di sini.</p>
-      </div>
-      <div class="fav-tabs">
-        <button class="filter-btn active" id="favTabChar">Aksara</button>
-        <button class="filter-btn" id="favTabVocab">Kosakata</button>
-      </div>
-      <div id="favCharGrid" class="char-grid" style="margin-top:20px"></div>
-      <div id="favVocabGrid" class="vocab-grid" style="margin-top:20px;display:none"></div>
-      <div class="fav-empty hidden" id="favEmpty">Belum ada favorit. Klik ⭐ pada kartu aksara atau kosakata! 🌿</div>
-    </section>
+      <!-- FAVORIT -->
+      <section id="section-favorit" class="section">
+        <div class="page-header"><h1 class="page-title">Favorit <span class="jp-sub">お気に入り</span></h1></div>
+        <p class="section-desc">Kartu aksara & kosakata yang kamu tandai ⭐.</p>
+        <div class="fav-tabs">
+          <button class="filter-btn active" id="favTabChar">Aksara</button>
+          <button class="filter-btn" id="favTabVocab">Kosakata</button>
+        </div>
+        <div id="favCharGrid" class="char-grid" style="margin-top:20px"></div>
+        <div id="favVocabGrid" class="vocab-grid" style="margin-top:20px;display:none"></div>
+        <div class="fav-empty hidden" id="favEmpty">Belum ada favorit. Klik ⭐ pada kartu aksara atau kosakata! 🌿</div>
+      </section>
 
-    <!-- ===== QUIZ ===== -->
-    <section id="section-quiz" class="section">
-      <div class="quiz-header">
-        <h2 class="section-title">Kuis <span class="jp-sub">テスト</span></h2>
+      <!-- QUIZ -->
+      <section id="section-quiz" class="section">
+        <div class="page-header"><h1 class="page-title">Kuis <span class="jp-sub">テスト</span></h1></div>
         <p class="section-desc">Pilih pengaturan dan uji kemampuanmu.</p>
-      </div>
-      <div class="quiz-setup" id="quizSetup">
-        <div class="quiz-options">
-          <div class="quiz-option-group"><label>Tipe Aksara</label>
-            <div class="radio-group">
-              <label class="radio-pill"><input type="radio" name="quizType" value="hiragana" checked/> Hiragana</label>
-              <label class="radio-pill"><input type="radio" name="quizType" value="katakana"/> Katakana</label>
-              <label class="radio-pill"><input type="radio" name="quizType" value="mixed"/> Campuran</label>
-            </div>
-          </div>
-          <div class="quiz-option-group"><label>Mode</label>
-            <div class="radio-group">
-              <label class="radio-pill"><input type="radio" name="quizMode" value="charToRoma" checked/> Aksara → Romaji</label>
-              <label class="radio-pill"><input type="radio" name="quizMode" value="romaToChar"/> Romaji → Aksara</label>
-            </div>
-          </div>
-          <div class="quiz-option-group"><label>Jumlah Soal</label>
-            <div class="radio-group">
-              <label class="radio-pill"><input type="radio" name="quizCount" value="10" checked/> 10 Soal</label>
-              <label class="radio-pill"><input type="radio" name="quizCount" value="20"/> 20 Soal</label>
-              <label class="radio-pill"><input type="radio" name="quizCount" value="46"/> Semua</label>
-            </div>
-          </div>
-          <div class="quiz-option-group"><label>Timer per Soal</label>
-            <div class="radio-group">
-              <label class="radio-pill"><input type="radio" name="quizTimer" value="0" checked/> Tanpa Timer</label>
-              <label class="radio-pill"><input type="radio" name="quizTimer" value="10"/> 10 Detik</label>
-              <label class="radio-pill"><input type="radio" name="quizTimer" value="7"/> 7 Detik</label>
-              <label class="radio-pill"><input type="radio" name="quizTimer" value="5"/> 5 Detik</label>
-            </div>
-          </div>
-        </div>
-        <button class="btn-primary big" id="startQuiz">Mulai Kuis</button>
-      </div>
 
-      <div class="quiz-game hidden" id="quizGame">
-        <div class="timer-wrap hidden" id="timerWrap">
-          <svg class="timer-ring" viewBox="0 0 48 48">
-            <circle class="timer-bg" cx="24" cy="24" r="20"/>
-            <circle class="timer-arc" id="timerArc" cx="24" cy="24" r="20"/>
-          </svg>
-          <span class="timer-num" id="timerNum">10</span>
+        <div class="quiz-setup" id="quizSetup">
+          <div class="quiz-options">
+            <div class="quiz-option-group"><label>Tipe Aksara</label>
+              <div class="radio-group">
+                <label class="radio-pill"><input type="radio" name="quizType" value="hiragana" checked/> Hiragana</label>
+                <label class="radio-pill"><input type="radio" name="quizType" value="katakana"/> Katakana</label>
+                <label class="radio-pill"><input type="radio" name="quizType" value="mixed"/> Campuran</label>
+              </div>
+            </div>
+            <div class="quiz-option-group"><label>Mode</label>
+              <div class="radio-group">
+                <label class="radio-pill"><input type="radio" name="quizMode" value="charToRoma" checked/> Aksara → Romaji</label>
+                <label class="radio-pill"><input type="radio" name="quizMode" value="romaToChar"/> Romaji → Aksara</label>
+              </div>
+            </div>
+            <div class="quiz-option-group"><label>Jumlah Soal</label>
+              <div class="radio-group">
+                <label class="radio-pill"><input type="radio" name="quizCount" value="10" checked/> 10 Soal</label>
+                <label class="radio-pill"><input type="radio" name="quizCount" value="20"/> 20 Soal</label>
+                <label class="radio-pill"><input type="radio" name="quizCount" value="46"/> Semua</label>
+              </div>
+            </div>
+            <div class="quiz-option-group"><label>Timer per Soal</label>
+              <div class="radio-group">
+                <label class="radio-pill"><input type="radio" name="quizTimer" value="0" checked/> Tanpa Timer</label>
+                <label class="radio-pill"><input type="radio" name="quizTimer" value="10"/> 10 Detik</label>
+                <label class="radio-pill"><input type="radio" name="quizTimer" value="7"/> 7 Detik</label>
+                <label class="radio-pill"><input type="radio" name="quizTimer" value="5"/> 5 Detik</label>
+              </div>
+            </div>
+          </div>
+          <button class="btn-primary big" id="startQuiz">Mulai Kuis</button>
         </div>
-        <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="quizFill"></div></div>
-        <div class="quiz-info"><span id="quizProgress">Soal 1/10</span><span id="quizScore">✓ 0 &nbsp;✗ 0</span></div>
-        <div class="quiz-question-box">
-          <div class="quiz-question" id="quizQuestion">あ</div>
-          <p class="quiz-question-label" id="quizLabel">Apa romaji dari aksara ini?</p>
-        </div>
-        <div class="quiz-choices" id="quizChoices"></div>
-        <div class="quiz-feedback hidden" id="quizFeedback">
-          <span class="feedback-face" id="feedbackFace">✓</span>
-          <span class="feedback-msg" id="feedbackMsg">Tepat!</span>
-        </div>
-      </div>
 
-      <div class="quiz-result hidden" id="quizResult">
-        <div class="result-icon">結</div>
-        <h3 id="resultTitle">Hebat!</h3>
-        <div class="result-score"><span id="resultScore">8/10</span><span id="resultPercent">80%</span></div>
-        <p id="resultMsg">Terus berlatih!</p>
-        <div class="result-breakdown" id="resultBreakdown"></div>
-        <div class="result-actions">
-          <button class="btn-primary big" id="retryQuiz">Coba Lagi</button>
-          <button class="btn-ghost" id="backToSetup">Ganti Pengaturan</button>
+        <div class="quiz-game hidden" id="quizGame">
+          <div class="timer-wrap hidden" id="timerWrap">
+            <svg class="timer-ring" viewBox="0 0 48 48">
+              <circle class="timer-bg" cx="24" cy="24" r="20"/>
+              <circle class="timer-arc" id="timerArc" cx="24" cy="24" r="20"/>
+            </svg>
+            <span class="timer-num" id="timerNum">10</span>
+          </div>
+          <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="quizFill"></div></div>
+          <div class="quiz-info"><span id="quizProgress">Soal 1/10</span><span id="quizScore">✓ 0 ✗ 0</span></div>
+          <div class="quiz-question-box">
+            <div class="quiz-question" id="quizQuestion">あ</div>
+            <p class="quiz-question-label" id="quizLabel">Apa romaji dari aksara ini?</p>
+          </div>
+          <div class="quiz-choices" id="quizChoices"></div>
+          <div class="quiz-feedback hidden" id="quizFeedback">
+            <span class="feedback-face" id="feedbackFace">✓</span>
+            <span class="feedback-msg" id="feedbackMsg">Tepat!</span>
+          </div>
         </div>
-      </div>
-    </section>
 
-  </main>
-</div>
+        <div class="quiz-result hidden" id="quizResult">
+          <div class="result-icon">結</div>
+          <h3 id="resultTitle">Hebat!</h3>
+          <div class="result-score"><span id="resultScore">8/10</span><span id="resultPercent">80%</span></div>
+          <p id="resultMsg">Terus berlatih!</p>
+          <div class="result-breakdown" id="resultBreakdown"></div>
+          <div class="result-actions">
+            <button class="btn-primary big" id="retryQuiz">Coba Lagi</button>
+            <button class="btn-ghost" id="backToSetup">Ganti Pengaturan</button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div><!-- /app-layout -->
+
+  <!-- MOBILE BOTTOM NAV -->
+  <nav class="mobile-bottom-nav">
+    <button class="mbn-btn active" data-section="home"><span class="mbn-icon">🏠</span><span class="mbn-label">Beranda</span></button>
+    <button class="mbn-btn" data-section="hiragana"><span class="mbn-icon mbn-jp">ひ</span><span class="mbn-label">Hiragana</span></button>
+    <button class="mbn-btn" data-section="katakana"><span class="mbn-icon mbn-jp">カ</span><span class="mbn-label">Katakana</span></button>
+    <button class="mbn-btn" data-section="vocab"><span class="mbn-icon">📖</span><span class="mbn-label">Kosakata</span></button>
+    <button class="mbn-btn" data-section="budaya"><span class="mbn-icon">🌸</span><span class="mbn-label">Budaya</span></button>
+    <button class="mbn-btn" data-section="favorit"><span class="mbn-icon">⭐</span><span class="mbn-label">Favorit</span></button>
+    <button class="mbn-btn" data-section="quiz"><span class="mbn-icon">🎯</span><span class="mbn-label">Kuis</span></button>
+  </nav>
+
+</div><!-- /app-wrap -->
 
 <!-- POPUP char -->
 <div class="card-popup hidden" id="cardPopup">
   <button class="popup-close" id="popupClose">✕</button>
-  <button class="popup-fav-btn" id="popupFavBtn" title="Favorit">⭐</button>
+  <button class="popup-fav-btn" id="popupFavBtn">⭐</button>
   <div class="popup-char" id="popupChar">あ</div>
   <div class="popup-roma" id="popupRoma">a</div>
   <div class="popup-type" id="popupType">Hiragana</div>
@@ -372,7 +400,6 @@
     <div class="badges-grid" id="badgesGrid"></div>
   </div>
 </div>
-
 <div class="popup-overlay hidden" id="badgesOverlay"></div>
 <div class="toast hidden" id="toast"></div>
 

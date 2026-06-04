@@ -17,8 +17,12 @@ document.addEventListener("DOMContentLoaded", () => {
      LOGIN
      ============================================= */
   function applyName(name) {
-    $("heroName").textContent      = name;
-    $("headerGreeting").textContent = `Halo, ${name}! 🌿`;
+    $("heroName").textContent = name;
+    // sidebar
+    if($("sidebarName"))  $("sidebarName").textContent  = name;
+    if($("sidebarAvatar")) $("sidebarAvatar").textContent = name.charAt(0).toUpperCase();
+    // mobile topbar
+    if($("headerGreeting")) $("headerGreeting").textContent = `Halo, ${name}! 🌿`;
   }
   function enterApp(name) {
     applyName(name);
@@ -39,13 +43,15 @@ document.addEventListener("DOMContentLoaded", () => {
   $("loginBtn").addEventListener("click", doLogin);
   $("nameInput").addEventListener("keydown", e => { if(e.key==="Enter") doLogin(); });
   $("nameInput").addEventListener("animationend", () => $("nameInput").classList.remove("shake"));
-  $("logoutBtn").addEventListener("click", () => {
+  function doLogout() {
     sessionStorage.removeItem("nihongoName");
     $("appWrap").classList.add("hidden");
     $("loginScreen").classList.remove("hidden");
     $("loginScreen").style.opacity="1";
     $("nameInput").value=""; $("nameInput").focus();
-  });
+  }
+  if($("logoutBtn"))     $("logoutBtn").addEventListener("click", doLogout);
+  if($("sidebarLogout")) $("sidebarLogout").addEventListener("click", doLogout);
   const savedName = sessionStorage.getItem("nihongoName");
   if (savedName) enterApp(savedName);
 
@@ -61,9 +67,9 @@ document.addEventListener("DOMContentLoaded", () => {
     window.scrollTo({top:0,behavior:"smooth"});
     if (id==="favorit") renderFav();
   }
-  navBtns.forEach(b => b.addEventListener("click",()=>showSection(b.dataset.section)));
-  document.querySelectorAll("[data-section]").forEach(b => {
-    if(b.tagName==="BUTTON") b.addEventListener("click",()=>showSection(b.dataset.section));
+  // Wire ALL nav buttons: sidebar, mobile bottom nav, hero buttons
+  document.querySelectorAll(".sidebar-btn, .mbn-btn, [data-section]").forEach(b => {
+    if(b.tagName==="BUTTON") b.addEventListener("click",()=>{ if(b.dataset.section) showSection(b.dataset.section); });
   });
   document.querySelectorAll(".info-card[data-target]").forEach(c =>
     c.addEventListener("click",()=>showSection(c.dataset.target))
@@ -80,6 +86,8 @@ document.addEventListener("DOMContentLoaded", () => {
       lsSet("nihongo_streak",streak); lsSet("nihongo_lastvisit",today);
     }
     $("streakCount").textContent = streak;
+    if($("streakCountLg"))    $("streakCountLg").textContent    = streak;
+    if($("sidebarStreakNum")) $("sidebarStreakNum").textContent  = streak;
     $("streakBannerTitle").textContent = streak>1 ? `🔥 Streak ${streak} hari berturut-turut!` : "🔥 Streak dimulai hari ini!";
     $("streakBannerSub").textContent   = streak>1 ? `Kamu sudah belajar ${streak} hari berturut-turut. Jangan putus!` : "Belajar setiap hari untuk membangun streak!";
     const dotsEl=$("streakDots"); dotsEl.innerHTML="";
@@ -178,12 +186,15 @@ document.addEventListener("DOMContentLoaded", () => {
       grid.appendChild(el);
     });
   }
-  $("badgeBell").addEventListener("click",()=>{
+  function openBadgesModal() {
     renderBadges();
     $("badgesModal").classList.remove("hidden");
     $("badgesOverlay").classList.remove("hidden");
-    $("badgeNewDot").classList.add("hidden");
-  });
+    if($("badgeNewDot"))   $("badgeNewDot").classList.add("hidden");
+    if($("badgeNewDotLg")) $("badgeNewDotLg").classList.add("hidden");
+  }
+  if($("badgeBell"))   $("badgeBell").addEventListener("click", openBadgesModal);
+  if($("badgeBellLg")) $("badgeBellLg").addEventListener("click", openBadgesModal);
   $("badgesClose").addEventListener("click",()=>{ $("badgesModal").classList.add("hidden"); $("badgesOverlay").classList.add("hidden"); });
   $("badgesOverlay").addEventListener("click",()=>{ $("badgesModal").classList.add("hidden"); $("badgesOverlay").classList.add("hidden"); });
 
@@ -433,7 +444,7 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
         <span class="budaya-cat-tag">${catLabel}</span>
         ${isSeen?'<span class="budaya-seen-badge">✓ Sudah dibaca</span>':""}
-        <div class="budaya-preview">${item.body}</div>
+        <div class="budaya-preview">${item.short||item.body||""}</div>
         <div class="budaya-read-more">Baca selengkapnya →</div>
       `;
       card.addEventListener("click",()=>{ openBudayaPopup(item); markBudayaSeen(item.id); });
@@ -449,10 +460,12 @@ document.addEventListener("DOMContentLoaded", () => {
   function openBudayaPopup(item) {
     $("budayaPopupEmoji").textContent = item.emoji;
     $("budayaPopupTitle").textContent = item.title;
-    $("budayaPopupBody").textContent  = item.body;
+    $("budayaPopupBody").textContent  = item.detail||item.body||"";
     const factsEl=$("budayaPopupFacts"); factsEl.innerHTML="";
-    item.facts.forEach(f=>{ const li=document.createElement("li"); li.textContent=f; factsEl.appendChild(li); });
-    $("budayaPopupTip").textContent = item.tip;
+    const factsData = item.facts || item.tags || [];
+    factsData.forEach(f=>{ const li=document.createElement("li"); li.textContent=f; factsEl.appendChild(li); });
+    $("budayaPopupTip").textContent = item.tip || "";
+    $("budayaPopupTip").style.display = (item.tip) ? "" : "none";
     $("budayaPopup").classList.remove("hidden");
     $("popupOverlay").classList.remove("hidden");
   }
